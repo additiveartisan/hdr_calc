@@ -231,8 +231,7 @@ struct SetGroupView: View {
             SetRulerView(speeds: speeds, colorIndex: colorIndex)
         }
         .padding(.horizontal, Theme.cardPadding)
-        .padding(.top, 10)
-        .padding(.bottom, 16)
+        .padding(.vertical, 14)
         .background(RoundedRectangle(cornerRadius: Theme.cardRadius).fill(.cardBackground))
         .accessibilityElement(children: .combine)
         .accessibilityLabel("Set \(setNumber): \(speeds.map(\.label).joined(separator: ", "))")
