@@ -31,6 +31,11 @@ HDR Calc is a precision exposure bracketing calculator for photographers who sho
 
 Built for real estate, architecture, landscape, and interior photography.
 
+<p align="center">
+  <img src="ios/screenshot_light.png" width="280" alt="HDR Calc light mode">&emsp;
+  <img src="ios/screenshot_dark.png" width="280" alt="HDR Calc dark mode">
+</p>
+
 <br>
 
 ### At a Glance
