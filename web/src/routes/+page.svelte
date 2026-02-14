@@ -293,4 +293,21 @@
 		color: var(--accent);
 	}
 
+	footer {
+		margin-top: auto;
+		padding: 32px 0 16px;
+		text-align: center;
+	}
+
+	footer a {
+		font-size: 12px;
+		color: var(--text-muted);
+		text-decoration: none;
+		letter-spacing: 0.03em;
+	}
+
+	footer a:hover {
+		color: var(--text);
+	}
+
 </style>
