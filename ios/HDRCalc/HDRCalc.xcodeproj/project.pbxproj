@@ -203,6 +203,11 @@
 			files = (
 				A10000010000000000000001 /* HDRCalcApp.swift in Sources */,
 				A10000010000000000000002 /* ContentView.swift in Sources */,
+				A10000010000000000000004 /* Speeds.swift in Sources */,
+				A10000010000000000000005 /* Calculator.swift in Sources */,
+				A10000010000000000000006 /* Theme.swift in Sources */,
+				A10000010000000000000007 /* CameraService.swift in Sources */,
+				A10000010000000000000008 /* MeterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +216,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A10000010000000000000010 /* HDRCalcTests.swift in Sources */,
+				A10000010000000000000011 /* SpeedsTests.swift in Sources */,
+				A10000010000000000000012 /* CalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
