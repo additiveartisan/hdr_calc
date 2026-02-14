@@ -69,9 +69,9 @@ struct ContentView: View {
             Spacer().frame(height: Theme.cardGap)
             speedPicker(label: "Highlights", selection: $vm.highlightIndex, target: .highlight)
             Spacer().frame(height: Theme.sectionGap)
-            segmentedSection(label: "AEB Frames", tag: framesBinding, options: [(3, "3"), (5, "5"), (7, "7"), (9, "9")])
+            segmentedSection(label: "AEB Frames", tag: $vm.frames, options: [(3, "3"), (5, "5"), (7, "7"), (9, "9")])
             Spacer().frame(height: Theme.cardGap)
-            segmentedSection(label: "EV Spacing", tag: spacingBinding, options: [(1.0, "1"), (1.5, "1.5"), (2.0, "2")])
+            segmentedSection(label: "EV Spacing", tag: $vm.spacing, options: [(1.0, "1"), (1.5, "1.5"), (2.0, "2")])
         }
     }
 
