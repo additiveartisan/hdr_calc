@@ -1,0 +1,112 @@
+{
+  "description": "HDR bracket calculator test vectors. Shared parity contract between web and iOS implementations.",
+  "vectors": [
+    {
+      "name": "Typical real estate interior",
+      "input": {
+        "shadow": "1/4",
+        "highlight": "1/1000",
+        "frames": 5,
+        "spacing": 1
+      },
+      "expected": {
+        "rangeEv": 8,
+        "numSets": 3,
+        "totalExposures": 15,
+        "sets": [
+          ["1/1000", "1/500", "1/250", "1/125", "1/60"],
+          ["1/60", "1/30", "1/15", "1/8", "1/4"],
+          ["1/4", "1/2", "1\"", "2\"", "4\""]
+        ]
+      }
+    },
+    {
+      "name": "Mild contrast (single set)",
+      "input": {
+        "shadow": "1/30",
+        "highlight": "1/250",
+        "frames": 5,
+        "spacing": 1
+      },
+      "expected": {
+        "rangeEv": 3,
+        "numSets": 1,
+        "totalExposures": 5,
+        "sets": [
+          ["1/250", "1/125", "1/60", "1/30", "1/15"]
+        ]
+      }
+    },
+    {
+      "name": "Extreme range, wide spacing",
+      "input": {
+        "shadow": "2\"",
+        "highlight": "1/4000",
+        "frames": 3,
+        "spacing": 2
+      },
+      "expected": {
+        "rangeEv": 13,
+        "numSets": 4,
+        "totalExposures": 12,
+        "sets": [
+          ["1/4000", "1/1000", "1/250"],
+          ["1/250", "1/60", "1/15"],
+          ["1/15", "1/4", "1\""],
+          ["1\"", "4\"", "15\""]
+        ]
+      }
+    },
+    {
+      "name": "Zero range",
+      "input": {
+        "shadow": "1/125",
+        "highlight": "1/125",
+        "frames": 5,
+        "spacing": 1
+      },
+      "expected": {
+        "rangeEv": 0,
+        "numSets": 0,
+        "totalExposures": 1,
+        "sets": []
+      }
+    },
+    {
+      "name": "Large frames, small spacing",
+      "input": {
+        "shadow": "1/2",
+        "highlight": "1/2000",
+        "frames": 9,
+        "spacing": 1
+      },
+      "expected": {
+        "rangeEv": 10,
+        "numSets": 2,
+        "totalExposures": 18,
+        "sets": [
+          ["1/2000", "1/1000", "1/500", "1/250", "1/125", "1/60", "1/30", "1/15", "1/8"],
+          ["1/8", "1/4", "1/2", "1\"", "2\"", "4\"", "8\"", "15\"", "30\""]
+        ]
+      }
+    },
+    {
+      "name": "1.5 EV spacing",
+      "input": {
+        "shadow": "1/4",
+        "highlight": "1/2000",
+        "frames": 5,
+        "spacing": 1.5
+      },
+      "expected": {
+        "rangeEv": 9,
+        "numSets": 2,
+        "totalExposures": 10,
+        "sets": [
+          ["1/2000", "1/640", "1/200", "1/60", "1/20"],
+          ["1/20", "1/6", "1/2", "1.6\"", "5\""]
+        ]
+      }
+    }
+  ]
+}

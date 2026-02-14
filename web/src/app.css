@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap');
+
+:root {
+	--bg: #ffffff;
+	--card: #f5f5f4;
+	--card-border: #e8e8e6;
+	--text: #1c1c1e;
+	--text-muted: #8e8e93;
+	--accent: #d4881e;
+	--accent-soft: #d4881e1a;
+	--bracket-1: #d4881e;
+	--bracket-2: #5b8fc9;
+
+	--page-padding: 24px;
+	--card-padding: 16px;
+	--card-gap: 12px;
+	--section-gap: 24px;
+	--card-radius: 12px;
+	--control-radius: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: #000000;
+		--card: #1c1c1e;
+		--card-border: #2c2c2e;
+		--text: #f5f5f0;
+		--text-muted: #8e8e93;
+		--accent: #e9a84c;
+		--accent-soft: #e9a84c1a;
+		--bracket-1: #e9a84c;
+		--bracket-2: #6ba3e0;
+	}
+}
+
+@media (min-width: 769px) {
+	:root {
+		--page-padding: 48px;
+	}
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+	font-weight: 400;
+	background: var(--bg);
+	color: var(--text);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.label {
+	font-weight: 500;
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: var(--text-muted);
+	margin-bottom: 8px;
+}
