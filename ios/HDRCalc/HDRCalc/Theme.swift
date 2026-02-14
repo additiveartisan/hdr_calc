@@ -1,11 +1,5 @@
 import SwiftUI
 
-extension Color {
-    static let cardBackground = Color("CardBackground")
-    static let cardBorder = Color("CardBorder")
-    static let bracket2 = Color("Bracket2")
-}
-
 enum Theme {
     static let pagePadding: CGFloat = 24
     static let pagePaddingIPad: CGFloat = 48
