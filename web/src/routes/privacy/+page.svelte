@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Privacy Policy - HDR Calculator</title>
+	<title>Privacy Policy - HDR Calc</title>
 </svelte:head>
 
 <main>
@@ -7,7 +7,7 @@
 		<h1 class="title">Privacy Policy</h1>
 		<p class="updated">Last updated: February 14, 2026</p>
 
-		<p>HDR Calculator does not collect, store, or transmit any personal data.</p>
+		<p>HDR Calc does not collect, store, or transmit any personal data.</p>
 
 		<h2>Camera Access</h2>
 		<p>The app requests camera permission solely to meter exposure from the scene for shutter speed selection. Camera frames are processed on-device in real time and are never recorded, stored, or transmitted. No photos or video are captured or saved.</p>
