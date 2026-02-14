@@ -25,6 +25,12 @@ struct ContentView: View {
     @State private var vm = CalculatorViewModel()
     @Environment(\.horizontalSizeClass) private var sizeClass
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var meterTarget: MeterTarget?
+
+    private enum MeterTarget: Identifiable {
+        case shadow, highlight
+        var id: Self { self }
+    }
 
     var body: some View {
         ScrollView {
