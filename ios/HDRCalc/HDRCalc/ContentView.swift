@@ -49,6 +49,9 @@ struct ContentView: View {
                 .padding(Theme.pagePadding)
             }
         }
+        .sheet(item: $meterTarget) { target in
+            MeterView(selectedIndex: target == .shadow ? $vm.shadowIndex : $vm.highlightIndex)
+        }
         .tint(.accentColor)
         .animation(reduceMotion ? nil : .default, value: vm.shadowIndex)
         .animation(reduceMotion ? nil : .default, value: vm.highlightIndex)
