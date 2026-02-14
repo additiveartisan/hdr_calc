@@ -7,7 +7,6 @@ enum Theme {
     static let cardGap: CGFloat = 12
     static let sectionGap: CGFloat = 24
     static let cardRadius: CGFloat = 12
-    static let controlRadius: CGFloat = 8
 
     static func setColor(_ index: Int) -> Color {
         index % 2 == 0 ? Color.accentColor : .bracket2
