@@ -35,7 +35,15 @@
 		A10000020000000000000001 /* HDRCalcApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDRCalcApp.swift; sourceTree = "<group>"; };
 		A10000020000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A10000020000000000000003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A10000020000000000000004 /* Speeds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speeds.swift; sourceTree = "<group>"; };
+		A10000020000000000000005 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		A10000020000000000000006 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		A10000020000000000000007 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
+		A10000020000000000000008 /* MeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterView.swift; sourceTree = "<group>"; };
 		A10000020000000000000010 /* HDRCalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDRCalcTests.swift; sourceTree = "<group>"; };
+		A10000020000000000000011 /* SpeedsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedsTests.swift; sourceTree = "<group>"; };
+		A10000020000000000000012 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
+		A10000020000000000000013 /* test_vectors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test_vectors.json; sourceTree = "<group>"; };
 		A10000060000000000000001 /* HDRCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HDRCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10000060000000000000002 /* HDRCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HDRCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
