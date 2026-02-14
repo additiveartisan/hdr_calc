@@ -79,9 +79,8 @@ HDR,bracketing,exposure,calculator,photography,AEB,shutter,speed,bracket,real es
 
 **Support URL**:
 ```
-https://github.com/[your-username]/hdr-calculator/issues
+https://github.com/additiveartisan/hdr_calc/issues
 ```
-(Replace with your actual support URL or a simple landing page)
 
 **Marketing URL** (optional):
 ```
