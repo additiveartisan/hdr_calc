@@ -62,9 +62,9 @@ struct ContentView: View {
         VStack(alignment: .leading, spacing: 0) {
             titleRow
             Spacer().frame(height: Theme.sectionGap)
-            speedPicker(label: "Shadows", selection: $vm.shadowIndex)
+            speedPicker(label: "Shadows", selection: $vm.shadowIndex, target: .shadow)
             Spacer().frame(height: Theme.cardGap)
-            speedPicker(label: "Highlights", selection: $vm.highlightIndex)
+            speedPicker(label: "Highlights", selection: $vm.highlightIndex, target: .highlight)
             Spacer().frame(height: Theme.sectionGap)
             segmentedSection(label: "AEB Frames", tag: framesBinding, options: [(3, "3"), (5, "5"), (7, "7"), (9, "9")])
             Spacer().frame(height: Theme.cardGap)
