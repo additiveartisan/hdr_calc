@@ -79,7 +79,7 @@
 		bottom: 4px;
 		border-radius: 16px;
 		background: var(--bg);
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 0 0.5px rgba(0, 0, 0, 0.08);
+		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1);
 		transition: left 300ms cubic-bezier(0.25, 1, 0.5, 1), width 300ms cubic-bezier(0.25, 1, 0.5, 1);
 		pointer-events: none;
 	}
