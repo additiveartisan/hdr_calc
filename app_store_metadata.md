@@ -1,10 +1,10 @@
-# HDR Calculator: App Store Connect Metadata
+# HDR Calc: App Store Connect Metadata
 
 ## App Information
 
 **App Name** (30 chars max):
 ```
-HDR Calculator
+HDR Calc
 ```
 
 **Subtitle** (30 chars max):
@@ -30,7 +30,7 @@ Plan your HDR bracket sets before you shoot. Enter your metered exposures, see e
 
 **Description** (4000 chars max):
 ```
-HDR Calculator is a precision exposure bracketing tool for photographers who shoot HDR. Enter your shadow and highlight shutter speeds, and instantly see the bracket sets you need to capture.
+HDR Calc is a precision exposure bracketing tool for photographers who shoot HDR. Enter your shadow and highlight shutter speeds, and instantly see the bracket sets you need to capture.
 
 Built for real estate, architecture, landscape, and interior photographers who need reliable HDR brackets every time.
 
@@ -68,7 +68,7 @@ PERFECT FOR
 - Landscape HDR
 - Any multi-exposure bracketing workflow
 
-HDR Calculator does one thing and does it well. No bloat, no tutorials, no upsells. Just open it, enter your speeds, and shoot.
+HDR Calc does one thing and does it well. No bloat, no tutorials, no upsells. Just open it, enter your speeds, and shoot.
 ```
 
 **Keywords** (100 chars max, comma-separated, no spaces after commas):

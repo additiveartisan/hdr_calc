@@ -11,7 +11,7 @@
 	<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="default" />
-	<title>HDR Calculator</title>
+	<title>HDR Calc</title>
 </svelte:head>
 
 {@render children()}

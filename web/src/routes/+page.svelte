@@ -38,7 +38,7 @@
 <main>
 	<div class="layout">
 		<div class="inputs">
-			<h1 class="title">HDR Calculator</h1>
+			<h1 class="title">HDR Calc</h1>
 
 			<SpeedPicker
 				label="Shadows"
