@@ -296,8 +296,8 @@
 	}
 
 	footer {
-		margin-top: auto;
-		padding: 32px 0 16px;
+		margin-top: 0;
+		padding: 16px 0;
 		text-align: center;
 	}
 
