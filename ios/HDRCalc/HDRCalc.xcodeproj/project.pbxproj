@@ -136,6 +136,7 @@
 			buildPhases = (
 				A1000000A000000000000002 /* Sources */,
 				A10000070000000000000002 /* Frameworks */,
+				A1000000B000000000000002 /* Resources */,
 			);
 			buildRules = (
 			);
