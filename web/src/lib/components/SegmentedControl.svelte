@@ -107,7 +107,7 @@
 	}
 
 	button.selected {
-		color: white;
+		color: var(--text);
 	}
 
 	button:focus-visible {
