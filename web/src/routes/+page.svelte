@@ -121,6 +121,8 @@
 	</div>
 
 	<footer>
+		<span>&copy; 2026 HDR Calc</span>
+		<span class="footer-sep">&middot;</span>
 		<a href="/privacy">Privacy</a>
 	</footer>
 </main>
