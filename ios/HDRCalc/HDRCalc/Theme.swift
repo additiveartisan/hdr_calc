@@ -1,1 +1,21 @@
 import SwiftUI
+
+extension Color {
+    static let cardBackground = Color("CardBackground")
+    static let cardBorder = Color("CardBorder")
+    static let bracket2 = Color("Bracket2")
+}
+
+enum Theme {
+    static let pagePadding: CGFloat = 24
+    static let pagePaddingIPad: CGFloat = 48
+    static let cardPadding: CGFloat = 16
+    static let cardGap: CGFloat = 12
+    static let sectionGap: CGFloat = 24
+    static let cardRadius: CGFloat = 12
+    static let controlRadius: CGFloat = 8
+
+    static func setColor(_ index: Int) -> Color {
+        index % 2 == 0 ? .accent : .bracket2
+    }
+}
