@@ -220,8 +220,9 @@
 
 	.set-group {
 		margin-bottom: 16px;
-		padding: 12px var(--card-padding);
+		padding: 20px var(--card-padding) 14px;
 		border-radius: var(--card-radius);
+		background: var(--card);
 	}
 
 .set-header {
