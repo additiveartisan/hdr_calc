@@ -123,14 +123,6 @@ struct ContentView: View {
 
     // MARK: - Segmented Controls
 
-    private var framesBinding: Binding<Int> {
-        $vm.frames
-    }
-
-    private var spacingBinding: Binding<Double> {
-        $vm.spacing
-    }
-
     private func segmentedSection<T: Hashable>(label: String, tag: Binding<T>, options: [(T, String)]) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(label)
