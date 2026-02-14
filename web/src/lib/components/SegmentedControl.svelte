@@ -99,10 +99,10 @@
 		font-family: inherit;
 		font-weight: 500;
 		font-size: 14px;
-		padding: 6px 10px;
+		padding: 7px 10px;
 		cursor: pointer;
 		color: var(--text-muted);
-		border-radius: calc(var(--control-radius) - 2px);
+		border-radius: 16px;
 		transition: color 150ms ease;
 	}
 
