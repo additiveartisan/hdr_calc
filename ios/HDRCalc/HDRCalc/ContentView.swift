@@ -82,13 +82,25 @@ struct ContentView: View {
         }
     }
 
-    private func speedPicker(label: String, selection: Binding<Int>) -> some View {
+    private func speedPicker(label: String, selection: Binding<Int>, target: MeterTarget) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(label)
-                .font(.caption.weight(.medium))
-                .textCase(.uppercase)
-                .tracking(0.5)
-                .foregroundStyle(.secondary)
+            HStack {
+                Text(label)
+                    .font(.caption.weight(.medium))
+                    .textCase(.uppercase)
+                    .tracking(0.5)
+                    .foregroundStyle(.secondary)
+                Spacer()
+                if CameraService.hasCamera {
+                    Button {
+                        meterTarget = target
+                    } label: {
+                        Image(systemName: "camera.metering.spot")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
 
             Picker(label, selection: selection) {
                 ForEach(speeds, id: \.index) { speed in
