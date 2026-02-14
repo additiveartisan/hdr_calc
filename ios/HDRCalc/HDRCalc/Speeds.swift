@@ -74,13 +74,7 @@ let speeds: [ShutterSpeed] = table.enumerated().map { index, entry in
     )
 }
 
-private let labelMap: [String: Int] = {
-    var map = [String: Int]()
-    for s in speeds {
-        map[s.label] = s.index
-    }
-    return map
-}()
+private let labelMap: [String: Int] = Dictionary(uniqueKeysWithValues: speeds.map { ($0.label, $0.index) })
 
 func labelToIndex(_ label: String) -> Int {
     labelMap[label] ?? -1
