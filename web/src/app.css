@@ -17,6 +17,7 @@
 	--section-gap: 24px;
 	--card-radius: 12px;
 	--control-radius: 8px;
+	--pill: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,6 +25,7 @@
 		--bg: #000000;
 		--card: #1c1c1e;
 		--card-border: #2c2c2e;
+		--pill: #636366;
 		--text: #f5f5f0;
 		--text-muted: #8e8e93;
 		--accent: #e9a84c;
