@@ -52,8 +52,8 @@
 	<div
 		class="pill"
 		class:moving
-		style:left="{pillLeft + 2}px"
-		style:width="{pillWidth - 4}px"
+		style:left="{pillLeft}px"
+		style:width="{pillWidth}px"
 		ontransitionend={(e) => { if (e.propertyName === 'left') moving = false; }}
 	></div>
 	{#each options as opt}
