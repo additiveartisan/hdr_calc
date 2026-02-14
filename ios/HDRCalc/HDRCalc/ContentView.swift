@@ -94,14 +94,12 @@ struct ContentView: View {
                     .tracking(0.5)
                     .foregroundStyle(.secondary)
                 Spacer()
-                if CameraService.hasCamera {
-                    Button {
-                        meterTarget = target
-                    } label: {
-                        Image(systemName: "camera.metering.spot")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
+                Button {
+                    meterTarget = target
+                } label: {
+                    Image(systemName: "camera.metering.spot")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
                 }
             }
 
