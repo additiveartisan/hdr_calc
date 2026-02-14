@@ -171,13 +171,18 @@ hdr_calc/
       routes/
         +page.svelte        Main interface
         privacy/            Privacy policy
-  ios/                      (planned)
+  ios/
     HDRCalc/
+      HDRCalcApp.swift      App entry point
       Calculator.swift      Core algorithm (Swift port)
       Speeds.swift          Speed table + nearestSpeed()
+      Theme.swift           Colors + spacing constants
       ContentView.swift     Main UI
       CameraService.swift   AVCaptureSession + metering
       MeterView.swift       Camera preview sheet
+    HDRCalcTests/
+      SpeedsTests.swift     Speed table + lookup tests
+      CalculatorTests.swift Test vector parity tests
 ```
 
 Both implementations validate against the same `test_vectors.json` to guarantee parity.
