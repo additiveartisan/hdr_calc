@@ -80,6 +80,11 @@
 			children = (
 				A10000020000000000000001 /* HDRCalcApp.swift */,
 				A10000020000000000000002 /* ContentView.swift */,
+				A10000020000000000000004 /* Speeds.swift */,
+				A10000020000000000000005 /* Calculator.swift */,
+				A10000020000000000000006 /* Theme.swift */,
+				A10000020000000000000007 /* CameraService.swift */,
+				A10000020000000000000008 /* MeterView.swift */,
 				A10000020000000000000003 /* Assets.xcassets */,
 			);
 			path = HDRCalc;
@@ -89,6 +94,9 @@
 			isa = PBXGroup;
 			children = (
 				A10000020000000000000010 /* HDRCalcTests.swift */,
+				A10000020000000000000011 /* SpeedsTests.swift */,
+				A10000020000000000000012 /* CalculatorTests.swift */,
+				A10000020000000000000013 /* test_vectors.json */,
 			);
 			path = HDRCalcTests;
 			sourceTree = "<group>";
