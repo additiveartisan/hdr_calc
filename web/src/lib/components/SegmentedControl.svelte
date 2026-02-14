@@ -54,6 +54,7 @@
 >
 	<div
 		class="pill"
+		class:moving
 		style:left="{pillLeft + 2}px"
 		style:width="{pillWidth - 4}px"
 	></div>
