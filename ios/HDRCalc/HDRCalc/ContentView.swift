@@ -285,12 +285,6 @@ struct SetRulerView: View {
     }
 }
 
-// MARK: - App Entry
-
-extension HDRCalcApp {
-    // accent tint is applied via .tint() in ContentView
-}
-
 #Preview {
     ContentView()
 }
