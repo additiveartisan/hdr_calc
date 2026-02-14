@@ -90,8 +90,8 @@
 		-webkit-backdrop-filter: blur(20px);
 		backdrop-filter: blur(20px);
 		transition:
-			left 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275),
-			width 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275),
+			left 450ms cubic-bezier(0.25, 0.8, 0.35, 1.1),
+			width 450ms cubic-bezier(0.25, 0.8, 0.35, 1.1),
 			background 0ms;
 		pointer-events: none;
 	}
