@@ -156,7 +156,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					A10000050000000000000001 = {
 						CreatedOnToolsVersion = 16.0;
@@ -298,6 +298,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -353,6 +354,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -461,15 +463,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A10000090000000000000003 /* Build configuration list for PBXProject "HDRCalc" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A1000000D000000000000001 /* Debug */,
-				A1000000D000000000000002 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		A10000090000000000000001 /* Build configuration list for PBXNativeTarget "HDRCalc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -488,8 +481,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		A10000090000000000000003 /* Build configuration list for PBXProject "HDRCalc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000000D000000000000001 /* Debug */,
+				A1000000D000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
-
 	};
 	rootObject = A10000040000000000000001 /* Project object */;
 }
