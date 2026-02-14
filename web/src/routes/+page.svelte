@@ -119,6 +119,10 @@
 			{/if}
 		</div>
 	</div>
+
+	<footer>
+		<a href="/privacy">Privacy</a>
+	</footer>
 </main>
 
 <style>
