@@ -84,7 +84,7 @@ https://github.com/additiveartisan/hdr_calc/issues
 
 **Marketing URL** (optional):
 ```
-(leave blank or add project page URL)
+https://hdrcalc.com
 ```
 
 **Copyright**:
