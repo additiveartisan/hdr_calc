@@ -301,6 +301,15 @@
 		text-align: center;
 	}
 
+	footer span {
+		font-size: 12px;
+		color: var(--text-muted);
+	}
+
+	.footer-sep {
+		opacity: 0.4;
+	}
+
 	footer a {
 		font-size: 12px;
 		color: var(--text-muted);
