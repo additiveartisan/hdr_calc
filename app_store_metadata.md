@@ -97,32 +97,11 @@ https://github.com/additiveartisan/hdr_calc/issues
 
 ## Privacy Policy
 
-**Privacy Policy URL**: Required. Since the app collects no data at all, you still need a hosted page. A simple GitHub Pages or static site works.
-
-Draft privacy policy text (host this somewhere):
-
+**Privacy Policy URL**: Hosted at `/privacy` on the web app.
 ```
-Privacy Policy for HDR Calculator
-
-Last updated: February 14, 2026
-
-HDR Calculator does not collect, store, or transmit any personal data.
-
-Camera Access: The app requests camera permission solely to meter exposure
-from the scene for shutter speed selection. Camera frames are processed
-on-device in real time and are never recorded, stored, or transmitted.
-No photos or video are captured or saved.
-
-Analytics: None. The app contains no analytics, tracking, or crash
-reporting frameworks.
-
-Third-Party Services: None. The app makes no network requests.
-
-Data Storage: All settings exist only in local app memory for the
-duration of the session. Nothing is written to disk or synced.
-
-Contact: [your email]
+[your-deployed-domain]/privacy
 ```
+Source: `web/src/routes/privacy/+page.svelte`
 
 ---
 
