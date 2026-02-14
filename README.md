@@ -54,13 +54,30 @@ Built for real estate, architecture, landscape, and interior photography.
 Meter the brightest and darkest parts of your scene. HDR Calc figures out the rest.
 
 ```
-  Shadows            Highlights          AEB         Spacing
-  ┌─────────┐        ┌─────────┐
-  │  1/4    │        │ 1/1000  │       5 frames     1 EV
-  └─────────┘        └─────────┘
+  HDR Calc ─────────────────
 
-  8 EV  ─────────────────────────────────────────
-  Scene Dynamic Range
+  SHADOWS
+  ┌───────────────────────┐
+  │       1/4 sec         │
+  └───────────────────────┘
+
+  HIGHLIGHTS
+  ┌───────────────────────┐
+  │      1/1000 sec       │
+  └───────────────────────┘
+
+  AEB FRAMES
+  ┌─────┬─────┬─────┬─────┐
+  │  3  │ [5] │  7  │  9  │
+  └─────┴─────┴─────┴─────┘
+
+  EV SPACING
+  ┌───────┬───────┬───────┐
+  │  [1]  │  1.5  │   2   │
+  └───────┴───────┴───────┘
+
+  8 EV ─────────────────────
+  SCENE DYNAMIC RANGE
   3 sets  ·  15 exposures
 
   ● Set 1
