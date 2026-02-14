@@ -23,8 +23,6 @@
 		const newLeft = btn.offsetLeft;
 		if (pillLeft !== 0 && newLeft !== pillLeft) {
 			moving = true;
-			clearTimeout(moveTimer);
-			moveTimer = setTimeout(() => { moving = false; }, 400);
 		}
 		pillLeft = newLeft;
 		pillWidth = btn.offsetWidth;
