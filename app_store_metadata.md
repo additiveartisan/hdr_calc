@@ -97,9 +97,9 @@ https://hdrcalc.com
 
 ## Privacy Policy
 
-**Privacy Policy URL**: Hosted at `/privacy` on the web app.
+**Privacy Policy URL**:
 ```
-[your-deployed-domain]/privacy
+https://hdrcalc.com/privacy
 ```
 Source: `web/src/routes/privacy/+page.svelte`
 
