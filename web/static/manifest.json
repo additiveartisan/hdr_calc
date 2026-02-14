@@ -1,0 +1,16 @@
+{
+	"name": "HDR Calculator",
+	"short_name": "HDR Calc",
+	"description": "HDR exposure bracketing calculator for photographers",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#000000",
+	"theme_color": "#D4881E",
+	"icons": [
+		{
+			"src": "/favicon.svg",
+			"sizes": "any",
+			"type": "image/svg+xml"
+		}
+	]
+}
