@@ -16,6 +16,6 @@ enum Theme {
     static let controlRadius: CGFloat = 8
 
     static func setColor(_ index: Int) -> Color {
-        index % 2 == 0 ? .accent : .bracket2
+        index % 2 == 0 ? Color.accentColor : .bracket2
     }
 }
