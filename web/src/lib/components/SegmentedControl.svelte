@@ -92,12 +92,14 @@
 		transition:
 			left 450ms cubic-bezier(0.25, 0.8, 0.35, 1.1),
 			width 450ms cubic-bezier(0.25, 0.8, 0.35, 1.1),
-			background 0ms;
+			background 0ms,
+			transform 450ms cubic-bezier(0.25, 0.8, 0.35, 1.1);
 		pointer-events: none;
 	}
 
 	.pill.moving {
 		background: var(--pill-glass);
+		transform: scale(1.06);
 	}
 
 	@media (prefers-reduced-motion: reduce) {
