@@ -12,13 +12,21 @@
 	let containerEl: HTMLDivElement | undefined = $state();
 	let pillLeft = $state(0);
 	let pillWidth = $state(0);
+	let moving = $state(false);
+	let moveTimer: ReturnType<typeof setTimeout> | undefined;
 
 	$effect(() => {
 		if (!containerEl || selectedIdx < 0) return;
 		const buttons = containerEl.querySelectorAll('button');
 		const btn = buttons[selectedIdx] as HTMLElement | undefined;
 		if (!btn) return;
-		pillLeft = btn.offsetLeft;
+		const newLeft = btn.offsetLeft;
+		if (pillLeft !== 0 && newLeft !== pillLeft) {
+			moving = true;
+			clearTimeout(moveTimer);
+			moveTimer = setTimeout(() => { moving = false; }, 400);
+		}
+		pillLeft = newLeft;
 		pillWidth = btn.offsetWidth;
 	});
 
