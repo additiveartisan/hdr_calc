@@ -94,7 +94,7 @@
 		transition:
 			left 400ms cubic-bezier(0.34, 1.2, 0.64, 1),
 			width 400ms cubic-bezier(0.34, 1.2, 0.64, 1),
-			background 150ms ease;
+			background 50ms ease;
 		pointer-events: none;
 	}
 
