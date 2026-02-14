@@ -80,8 +80,17 @@
 		border-radius: 16px;
 		background: var(--pill);
 		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1);
-		transition: left 400ms cubic-bezier(0.34, 1.2, 0.64, 1), width 400ms cubic-bezier(0.34, 1.2, 0.64, 1);
+		-webkit-backdrop-filter: blur(20px);
+		backdrop-filter: blur(20px);
+		transition:
+			left 400ms cubic-bezier(0.34, 1.2, 0.64, 1),
+			width 400ms cubic-bezier(0.34, 1.2, 0.64, 1),
+			background 150ms ease;
 		pointer-events: none;
+	}
+
+	.pill.moving {
+		background: var(--pill-glass);
 	}
 
 	@media (prefers-reduced-motion: reduce) {
