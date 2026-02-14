@@ -13,7 +13,6 @@
 	let pillLeft = $state(0);
 	let pillWidth = $state(0);
 	let moving = $state(false);
-	let moveTimer: ReturnType<typeof setTimeout> | undefined;
 
 	$effect(() => {
 		if (!containerEl || selectedIdx < 0) return;
