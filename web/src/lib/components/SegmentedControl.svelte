@@ -91,10 +91,10 @@
 		-webkit-backdrop-filter: blur(20px);
 		backdrop-filter: blur(20px);
 		transition:
-			left 250ms cubic-bezier(0.2, 1, 0.3, 1),
-			width 250ms cubic-bezier(0.2, 1, 0.3, 1),
+			left 250ms cubic-bezier(0.25, 0.8, 0.35, 1.1),
+			width 250ms cubic-bezier(0.25, 0.8, 0.35, 1.1),
 			background 0ms,
-			transform 250ms cubic-bezier(0.2, 1, 0.3, 1);
+			transform 250ms cubic-bezier(0.25, 0.8, 0.35, 1.1);
 		pointer-events: none;
 	}
 
