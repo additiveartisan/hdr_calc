@@ -46,7 +46,7 @@ struct CameraConnectView: View {
         .onChange(of: service.connectionState) { _, newValue in
             if case .connected = newValue, !wasConnectedOnAppear {
                 Task {
-                    try? await Task.sleep(for: .seconds(1.5))
+                    try? await Task.sleep(for: .seconds(0.75))
                     dismiss()
                 }
             }
