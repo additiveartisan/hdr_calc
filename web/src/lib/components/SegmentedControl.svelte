@@ -99,7 +99,7 @@
 
 	.pill.moving {
 		background: var(--pill-glass);
-		transform: scale(1.06);
+		transform: scaleY(1.03);
 	}
 
 	@media (prefers-reduced-motion: reduce) {
