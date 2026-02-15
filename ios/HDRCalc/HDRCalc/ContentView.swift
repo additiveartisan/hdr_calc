@@ -347,4 +347,6 @@ struct SetRulerView: View {
 
 #Preview {
     ContentView()
+        .environment(CameraConnectionService())
+        .environment(ShootingViewModel())
 }
