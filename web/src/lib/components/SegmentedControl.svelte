@@ -78,6 +78,7 @@
 		border-radius: 20px;
 		padding: 2px;
 		gap: 0px;
+		overflow: hidden;
 	}
 
 	.pill {
