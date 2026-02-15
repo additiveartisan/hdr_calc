@@ -22,7 +22,9 @@ struct ShootConfirmView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                    Button { dismiss() } label: {
+                        Image(systemName: "chevron.left")
+                    }
                 }
             }
             .tint(.accentColor)
