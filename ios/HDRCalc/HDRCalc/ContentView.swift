@@ -128,7 +128,7 @@ struct ContentView: View {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
         }
-        .buttonStyle(.borderedProminent)
+        .buttonStyle(.bordered)
     }
 
     private var titleRow: some View {
