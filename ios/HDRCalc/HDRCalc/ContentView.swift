@@ -53,10 +53,10 @@ struct ContentView: View {
             MeterView(selectedIndex: target == .shadow ? $vm.shadowIndex : $vm.highlightIndex)
         }
         .tint(.accentColor)
-        .animation(reduceMotion ? nil : .default, value: vm.shadowIndex)
-        .animation(reduceMotion ? nil : .default, value: vm.highlightIndex)
-        .animation(reduceMotion ? nil : .default, value: vm.frames)
-        .animation(reduceMotion ? nil : .default, value: vm.spacing)
+        .animation(reduceMotion ? nil : .snappy(duration: 0.25), value: vm.shadowIndex)
+        .animation(reduceMotion ? nil : .snappy(duration: 0.25), value: vm.highlightIndex)
+        .animation(reduceMotion ? nil : .snappy(duration: 0.25), value: vm.frames)
+        .animation(reduceMotion ? nil : .snappy(duration: 0.25), value: vm.spacing)
     }
 
     // MARK: - Inputs
