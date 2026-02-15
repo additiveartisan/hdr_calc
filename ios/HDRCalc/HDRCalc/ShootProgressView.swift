@@ -40,9 +40,9 @@ struct ShootProgressView: View {
                 vm.cancel()
             } label: {
                 Text("Cancel")
-                    .font(.headline)
+                    .font(.subheadline.weight(.medium))
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
+                    .padding(.vertical, 12)
             }
             .buttonStyle(.bordered)
             .padding(.horizontal, Theme.pagePadding)
@@ -72,9 +72,9 @@ struct ShootProgressView: View {
                 vm.cancel()
             } label: {
                 Text("Cancel")
-                    .font(.headline)
+                    .font(.subheadline.weight(.medium))
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
+                    .padding(.vertical, 12)
             }
             .buttonStyle(.bordered)
             .padding(.horizontal, Theme.pagePadding)
