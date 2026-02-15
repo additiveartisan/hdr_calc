@@ -1,0 +1,90 @@
+import Foundation
+
+// MARK: - Connection
+
+enum ConnectionState: Equatable {
+    case disconnected
+    case discovering
+    case connecting(DiscoveredCamera)
+    case modeCheck(DiscoveredCamera)
+    case connected(DiscoveredCamera)
+    case error(String)
+
+    static func == (lhs: ConnectionState, rhs: ConnectionState) -> Bool {
+        switch (lhs, rhs) {
+        case (.disconnected, .disconnected): true
+        case (.discovering, .discovering): true
+        case (.connecting(let a), .connecting(let b)): a.id == b.id
+        case (.modeCheck(let a), .modeCheck(let b)): a.id == b.id
+        case (.connected(let a), .connected(let b)): a.id == b.id
+        case (.error(let a), .error(let b)): a == b
+        default: false
+        }
+    }
+}
+
+struct DiscoveredCamera: Identifiable, Equatable {
+    let id: String
+    let name: String
+    let address: String
+}
+
+// MARK: - Shooting
+
+enum ShootingPhase: Equatable {
+    case idle
+    case confirming
+    case shooting
+    case paused
+    case complete(ShootingResult)
+}
+
+struct ShootingProgress: Equatable {
+    var completedFrames: Int
+    var totalFrames: Int
+    var currentSet: Int
+    var totalSets: Int
+
+    var fractionComplete: Double {
+        guard totalFrames > 0 else { return 0 }
+        return Double(completedFrames) / Double(totalFrames)
+    }
+
+    var setProgress: String {
+        "Set \(currentSet) of \(totalSets)"
+    }
+
+    var frameProgress: String {
+        "\(completedFrames) of \(totalFrames) frames"
+    }
+
+    static let zero = ShootingProgress(completedFrames: 0, totalFrames: 0, currentSet: 0, totalSets: 0)
+}
+
+enum ShootingResult: Equatable {
+    case success(framesCaptured: Int)
+    case partial(framesCaptured: Int, totalExpected: Int)
+    case cancelled
+    case failed(String)
+
+    static func == (lhs: ShootingResult, rhs: ShootingResult) -> Bool {
+        switch (lhs, rhs) {
+        case (.success(let a), .success(let b)): a == b
+        case (.partial(let ac, let at), .partial(let bc, let bt)): ac == bc && at == bt
+        case (.cancelled, .cancelled): true
+        case (.failed(let a), .failed(let b)): a == b
+        default: false
+        }
+    }
+}
+
+struct SpeedWarning: Equatable {
+    let message: String
+    let severity: Severity
+
+    enum Severity: Equatable {
+        case info
+        case caution
+        case critical
+    }
+}
