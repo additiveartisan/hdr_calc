@@ -103,6 +103,12 @@
 				A10000020000000000000006 /* Theme.swift */,
 				A10000020000000000000007 /* CameraService.swift */,
 				A10000020000000000000008 /* MeterView.swift */,
+				A10000020000000000000020 /* SonyCameraTypes.swift */,
+				A10000020000000000000021 /* CameraConnectionService.swift */,
+				A10000020000000000000022 /* ShootingViewModel.swift */,
+				A10000020000000000000023 /* CameraConnectView.swift */,
+				A10000020000000000000024 /* ShootConfirmView.swift */,
+				A10000020000000000000025 /* ShootProgressView.swift */,
 				A10000020000000000000003 /* Assets.xcassets */,
 			);
 			path = HDRCalc;
