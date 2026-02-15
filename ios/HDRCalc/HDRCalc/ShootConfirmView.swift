@@ -110,7 +110,7 @@ struct ShootConfirmView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(.bordered)
             .padding(Theme.pagePadding)
         }
         .background(.bar)
