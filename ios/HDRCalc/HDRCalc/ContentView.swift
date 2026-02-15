@@ -124,9 +124,9 @@ struct ContentView: View {
                 Image(systemName: "camera.shutter.button")
                 Text("Shoot All Sets")
             }
-            .font(.headline)
+            .font(.subheadline.weight(.medium))
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 14)
+            .padding(.vertical, 12)
         }
         .buttonStyle(.borderedProminent)
     }
