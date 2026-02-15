@@ -3,6 +3,7 @@ import SwiftUI
 struct CameraConnectView: View {
     @Environment(CameraConnectionService.self) private var service
     @Environment(\.dismiss) private var dismiss
+    @State private var wasConnectedOnAppear = false
 
     var body: some View {
         @Bindable var service = service
@@ -28,11 +29,28 @@ struct CameraConnectView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                    }
                 }
             }
         }
         .tint(.accentColor)
+        .onAppear {
+            if case .connected = service.connectionState {
+                wasConnectedOnAppear = true
+            }
+        }
+        .onChange(of: service.connectionState) { _, newValue in
+            if case .connected = newValue, !wasConnectedOnAppear {
+                Task {
+                    try? await Task.sleep(for: .seconds(1.5))
+                    dismiss()
+                }
+            }
+        }
     }
 
     // MARK: - States
