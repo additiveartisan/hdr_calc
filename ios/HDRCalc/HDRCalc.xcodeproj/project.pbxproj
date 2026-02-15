@@ -244,6 +244,12 @@
 				A10000010000000000000006 /* Theme.swift in Sources */,
 				A10000010000000000000007 /* CameraService.swift in Sources */,
 				A10000010000000000000008 /* MeterView.swift in Sources */,
+				A10000010000000000000020 /* SonyCameraTypes.swift in Sources */,
+				A10000010000000000000021 /* CameraConnectionService.swift in Sources */,
+				A10000010000000000000022 /* ShootingViewModel.swift in Sources */,
+				A10000010000000000000023 /* CameraConnectView.swift in Sources */,
+				A10000010000000000000024 /* ShootConfirmView.swift in Sources */,
+				A10000010000000000000025 /* ShootProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
