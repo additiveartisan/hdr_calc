@@ -135,14 +135,11 @@ final class ShootingViewModelTests: XCTestCase {
 
     // MARK: - Cancel
 
-    func testCancel_setsCancelled() {
+    func testCancel_resetsToIdle() {
         vm._setPhaseForTesting(.shooting)
         vm.cancel()
-        if case .complete(.cancelled) = vm.phase {
-            // pass
-        } else {
-            XCTFail("Expected .complete(.cancelled), got \(vm.phase)")
-        }
+        XCTAssertEqual(vm.phase, .idle)
+        XCTAssertEqual(vm.progress, .zero)
     }
 
     // MARK: - Dismiss
