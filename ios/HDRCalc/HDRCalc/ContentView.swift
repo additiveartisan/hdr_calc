@@ -95,7 +95,25 @@ struct ContentView: View {
             segmentedSection(label: "AEB Frames", tag: $vm.frames, options: [(3, "3"), (5, "5"), (7, "7"), (9, "9")])
             Spacer().frame(height: Theme.cardGap)
             segmentedSection(label: "EV Spacing", tag: $vm.spacing, options: [(1.0, "1"), (1.5, "1.5"), (2.0, "2")])
+            Spacer().frame(height: Theme.sectionGap)
+            connectCameraButton
         }
+    }
+
+    private var connectCameraButton: some View {
+        Button {
+            showConnectSheet = true
+        } label: {
+            HStack {
+                Image(systemName: connectionService.isConnected ? "wifi" : "wifi.slash")
+                Text(connectionService.connectedCameraName ?? "Connect Camera")
+            }
+            .font(.subheadline.weight(.medium))
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+        }
+        .buttonStyle(.bordered)
+        .tint(connectionService.isConnected ? .green : .accentColor)
     }
 
     private var titleRow: some View {
