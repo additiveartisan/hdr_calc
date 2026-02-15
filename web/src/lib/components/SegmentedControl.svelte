@@ -90,11 +90,20 @@
 		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1);
 		-webkit-backdrop-filter: blur(20px);
 		backdrop-filter: blur(20px);
+		--spring-snappy: linear(
+			0, 0.009, 0.035 2.1%, 0.141 4.6%,
+			0.352 7.5%, 0.607 10.7%, 0.822 13.7%,
+			0.941 16.2%, 1.015 18.6%, 1.057 20.8%,
+			1.074 22.7%, 1.075 24.4%, 1.063 26.4%,
+			1.012 31.6%, 0.988 35%, 0.977 38.3%,
+			0.975 41.1%, 0.981 44.7%, 0.997 50.4%,
+			1.004 55%, 1.006 60.4%, 1 76.3%
+		);
 		transition:
-			left 300ms cubic-bezier(0.2, 0.8, 0.3, 1.2),
-			width 300ms cubic-bezier(0.2, 0.8, 0.3, 1.2),
+			left 350ms var(--spring-snappy),
+			width 350ms var(--spring-snappy),
 			background 0ms,
-			transform 300ms cubic-bezier(0.2, 0.8, 0.3, 1.2);
+			transform 350ms var(--spring-snappy);
 		pointer-events: none;
 	}
 
