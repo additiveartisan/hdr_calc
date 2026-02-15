@@ -90,20 +90,22 @@
 		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1);
 		-webkit-backdrop-filter: blur(20px);
 		backdrop-filter: blur(20px);
-		--spring-snappy: linear(
-			0, 0.009, 0.035 2.1%, 0.141 4.6%,
-			0.352 7.5%, 0.607 10.7%, 0.822 13.7%,
-			0.941 16.2%, 1.015 18.6%, 1.057 20.8%,
-			1.074 22.7%, 1.075 24.4%, 1.063 26.4%,
-			1.012 31.6%, 0.988 35%, 0.977 38.3%,
-			0.975 41.1%, 0.981 44.7%, 0.997 50.4%,
-			1.004 55%, 1.006 60.4%, 1 76.3%
+		--spring-bouncy: linear(
+			0, 0.006, 0.024 2.2%, 0.098 4.5%,
+			0.284 7.7%, 0.536 11.1%, 0.776 14.3%,
+			0.928 16.8%, 1.028 19%, 1.091 21%,
+			1.124 22.9%, 1.135 24.7%, 1.128 26.5%,
+			1.089 29.7%, 1.042 33.2%, 1.01 36.8%,
+			0.99 40.1%, 0.98 43.5%, 0.978 46.7%,
+			0.984 50.8%, 0.995 56.1%, 1.003 61.5%,
+			1.007 67%, 1.005 73.5%, 1.002 80%,
+			1 100%
 		);
 		transition:
-			left 350ms var(--spring-snappy),
-			width 350ms var(--spring-snappy),
+			left 400ms var(--spring-bouncy),
+			width 400ms var(--spring-bouncy),
 			background 0ms,
-			transform 350ms var(--spring-snappy);
+			transform 400ms var(--spring-bouncy);
 		pointer-events: none;
 	}
 
