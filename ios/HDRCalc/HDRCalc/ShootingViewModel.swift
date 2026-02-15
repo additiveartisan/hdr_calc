@@ -70,20 +70,47 @@ final class ShootingViewModel {
             totalSets: sets.count
         )
         phase = .shooting
+        simulateProgress(sets: sets)
     }
 
     func cancel() {
+        simulationTask?.cancel()
+        simulationTask = nil
         phase = .complete(.cancelled)
     }
 
     func retryRemaining() {
         phase = .shooting
+        simulateProgress(sets: activeSets)
     }
 
     func dismiss() {
+        simulationTask?.cancel()
+        simulationTask = nil
         phase = .idle
         progress = .zero
         activeSets = []
+    }
+
+    // Stub: simulate frames ticking through for demo purposes
+    private func simulateProgress(sets: [[ShutterSpeed]]) {
+        simulationTask?.cancel()
+        simulationTask = Task { @MainActor in
+            var completed = progress.completedFrames
+            for (setIndex, set) in sets.enumerated() {
+                guard !Task.isCancelled, phase == .shooting else { return }
+                progress.currentSet = setIndex + 1
+                for _ in set {
+                    guard !Task.isCancelled, phase == .shooting else { return }
+                    try? await Task.sleep(for: .milliseconds(400))
+                    guard !Task.isCancelled, phase == .shooting else { return }
+                    completed += 1
+                    progress.completedFrames = completed
+                }
+            }
+            guard !Task.isCancelled else { return }
+            phase = .complete(.success(framesCaptured: completed))
+        }
     }
 
     // Test-only: set phase synchronously
