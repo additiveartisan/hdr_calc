@@ -140,34 +140,22 @@ struct ShootProgressView: View {
                         vm.retryRemaining()
                     } label: {
                         Text("Retry Remaining")
-                            .font(.headline)
+                            .font(.subheadline.weight(.medium))
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
-
-                if result.isSuccess {
-                    Button {
-                        vm.dismiss()
-                    } label: {
-                        Text("Done")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                    }
-                    .buttonStyle(.borderedProminent)
-                } else {
-                    Button {
-                        vm.dismiss()
-                    } label: {
-                        Text("Done")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
+                            .padding(.vertical, 12)
                     }
                     .buttonStyle(.bordered)
                 }
+
+                Button {
+                    vm.dismiss()
+                } label: {
+                    Text("Done")
+                        .font(.subheadline.weight(.medium))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                }
+                .buttonStyle(.bordered)
             }
             .padding(.horizontal, Theme.pagePadding)
             .padding(.bottom, Theme.sectionGap)
