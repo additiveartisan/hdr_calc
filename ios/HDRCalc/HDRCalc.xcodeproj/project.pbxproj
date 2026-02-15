@@ -19,6 +19,15 @@
 		A10000010000000000000011 /* SpeedsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000011 /* SpeedsTests.swift */; };
 		A10000010000000000000012 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000012 /* CalculatorTests.swift */; };
 		A10000010000000000000013 /* test_vectors.json in Resources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000013 /* test_vectors.json */; };
+		A10000010000000000000020 /* SonyCameraTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000020 /* SonyCameraTypes.swift */; };
+		A10000010000000000000021 /* CameraConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000021 /* CameraConnectionService.swift */; };
+		A10000010000000000000022 /* ShootingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000022 /* ShootingViewModel.swift */; };
+		A10000010000000000000023 /* CameraConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000023 /* CameraConnectView.swift */; };
+		A10000010000000000000024 /* ShootConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000024 /* ShootConfirmView.swift */; };
+		A10000010000000000000025 /* ShootProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000025 /* ShootProgressView.swift */; };
+		A10000010000000000000026 /* SonyCameraTypesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000026 /* SonyCameraTypesTests.swift */; };
+		A10000010000000000000027 /* CameraConnectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000027 /* CameraConnectionServiceTests.swift */; };
+		A10000010000000000000028 /* ShootingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000028 /* ShootingViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
