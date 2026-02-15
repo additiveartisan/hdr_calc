@@ -32,6 +32,7 @@ struct CameraConnectView: View {
                 }
             }
         }
+        .tint(.accentColor)
     }
 
     // MARK: - States
