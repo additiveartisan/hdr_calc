@@ -260,6 +260,9 @@
 				A10000010000000000000010 /* HDRCalcTests.swift in Sources */,
 				A10000010000000000000011 /* SpeedsTests.swift in Sources */,
 				A10000010000000000000012 /* CalculatorTests.swift in Sources */,
+				A10000010000000000000026 /* SonyCameraTypesTests.swift in Sources */,
+				A10000010000000000000027 /* CameraConnectionServiceTests.swift in Sources */,
+				A10000010000000000000028 /* ShootingViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
