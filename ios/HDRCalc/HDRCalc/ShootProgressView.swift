@@ -147,15 +147,27 @@ struct ShootProgressView: View {
                     .buttonStyle(.borderedProminent)
                 }
 
-                Button {
-                    vm.dismiss()
-                } label: {
-                    Text("Done")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
+                if result.isSuccess {
+                    Button {
+                        vm.dismiss()
+                    } label: {
+                        Text("Done")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                    }
+                    .buttonStyle(.borderedProminent)
+                } else {
+                    Button {
+                        vm.dismiss()
+                    } label: {
+                        Text("Done")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                    }
+                    .buttonStyle(.bordered)
                 }
-                .buttonStyle(result.isSuccess ? .borderedProminent : .bordered)
             }
             .padding(.horizontal, Theme.pagePadding)
             .padding(.bottom, Theme.sectionGap)
