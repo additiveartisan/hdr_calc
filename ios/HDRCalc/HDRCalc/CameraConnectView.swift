@@ -49,7 +49,7 @@ struct CameraConnectView: View {
             Button("Start Discovery") {
                 service.startDiscovery()
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(.bordered)
             Spacer()
         }
     }
@@ -122,7 +122,7 @@ struct CameraConnectView: View {
             Button("Done") {
                 dismiss()
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(.bordered)
             Spacer()
         }
     }
@@ -142,7 +142,7 @@ struct CameraConnectView: View {
             Button("Try Again") {
                 service.retry()
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(.bordered)
             Spacer()
         }
     }
