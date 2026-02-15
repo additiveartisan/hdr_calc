@@ -76,7 +76,9 @@ final class ShootingViewModel {
     func cancel() {
         simulationTask?.cancel()
         simulationTask = nil
-        phase = .complete(.cancelled)
+        phase = .idle
+        progress = .zero
+        activeSets = []
     }
 
     func retryRemaining() {
