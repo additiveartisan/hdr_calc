@@ -25,6 +25,7 @@ struct ShootConfirmView: View {
                     Button("Cancel") { dismiss() }
                 }
             }
+            .tint(.accentColor)
             .safeAreaInset(edge: .bottom) {
                 shootButton
             }
