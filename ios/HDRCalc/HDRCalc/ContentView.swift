@@ -204,6 +204,10 @@ struct ContentView: View {
                     .padding(.top, 8)
                 Spacer().frame(height: Theme.sectionGap)
                 setsSection
+                if connectionService.isConnected {
+                    Spacer().frame(height: Theme.sectionGap)
+                    shootAllSetsButton
+                }
             }
         }
     }
