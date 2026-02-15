@@ -53,6 +53,15 @@
 		A10000020000000000000011 /* SpeedsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedsTests.swift; sourceTree = "<group>"; };
 		A10000020000000000000012 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		A10000020000000000000013 /* test_vectors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test_vectors.json; sourceTree = "<group>"; };
+		A10000020000000000000020 /* SonyCameraTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonyCameraTypes.swift; sourceTree = "<group>"; };
+		A10000020000000000000021 /* CameraConnectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraConnectionService.swift; sourceTree = "<group>"; };
+		A10000020000000000000022 /* ShootingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootingViewModel.swift; sourceTree = "<group>"; };
+		A10000020000000000000023 /* CameraConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraConnectView.swift; sourceTree = "<group>"; };
+		A10000020000000000000024 /* ShootConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootConfirmView.swift; sourceTree = "<group>"; };
+		A10000020000000000000025 /* ShootProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootProgressView.swift; sourceTree = "<group>"; };
+		A10000020000000000000026 /* SonyCameraTypesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonyCameraTypesTests.swift; sourceTree = "<group>"; };
+		A10000020000000000000027 /* CameraConnectionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraConnectionServiceTests.swift; sourceTree = "<group>"; };
+		A10000020000000000000028 /* ShootingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootingViewModelTests.swift; sourceTree = "<group>"; };
 		A10000060000000000000001 /* HDRCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HDRCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10000060000000000000002 /* HDRCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HDRCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
