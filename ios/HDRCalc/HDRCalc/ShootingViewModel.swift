@@ -6,6 +6,7 @@ final class ShootingViewModel {
     var progress: ShootingProgress = .zero
 
     private var activeSets: [[ShutterSpeed]] = []
+    private var simulationTask: Task<Void, Never>?
 
     var isShooting: Bool {
         phase == .shooting
