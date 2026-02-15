@@ -120,10 +120,18 @@ struct CameraConnectView: View {
                 .font(.title3.weight(.semibold))
             Text(camera.name)
                 .foregroundStyle(.secondary)
-            Button("Done") {
-                dismiss()
+            VStack(spacing: Theme.cardGap) {
+                Button("Done") {
+                    dismiss()
+                }
+                .buttonStyle(.bordered)
+                Button("Disconnect") {
+                    service.disconnect()
+                    dismiss()
+                }
+                .buttonStyle(.bordered)
+                .tint(.red)
             }
-            .buttonStyle(.bordered)
             Spacer()
         }
     }
