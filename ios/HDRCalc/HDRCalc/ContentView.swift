@@ -116,6 +116,21 @@ struct ContentView: View {
         .tint(connectionService.isConnected ? .green : .accentColor)
     }
 
+    private var shootAllSetsButton: some View {
+        Button {
+            showConfirmSheet = true
+        } label: {
+            HStack {
+                Image(systemName: "camera.shutter.button")
+                Text("Shoot All Sets")
+            }
+            .font(.headline)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 14)
+        }
+        .buttonStyle(.borderedProminent)
+    }
+
     private var titleRow: some View {
         HStack(spacing: 16) {
             Text("HDR Calc")
