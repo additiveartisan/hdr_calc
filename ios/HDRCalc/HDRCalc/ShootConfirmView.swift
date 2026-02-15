@@ -102,7 +102,10 @@ struct ShootConfirmView: View {
             Button {
                 onShoot()
             } label: {
-                Text("Shoot All Sets")
+                HStack {
+                    Image(systemName: "camera.shutter.button")
+                    Text("Shoot All Sets")
+                }
                     .font(.subheadline.weight(.medium))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
