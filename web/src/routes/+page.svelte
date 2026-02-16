@@ -214,6 +214,10 @@
 		border-color: var(--text-muted);
 	}
 
+	.help-btn:focus:not(:focus-visible) {
+		outline: none;
+	}
+
 	.range-stat {
 		display: flex;
 		align-items: baseline;
