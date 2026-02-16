@@ -31,6 +31,7 @@ struct ContentView: View {
     @State private var showConnectSheet = false
     @State private var showConfirmSheet = false
     @State private var showProgressCover = false
+    @State private var showHelp = false
 
     private enum MeterTarget: Identifiable {
         case shadow, highlight
