@@ -34,6 +34,8 @@ struct ShootProgressView: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
 
+            frameStatusLabel
+
             Spacer()
 
             Button(role: .destructive) {
