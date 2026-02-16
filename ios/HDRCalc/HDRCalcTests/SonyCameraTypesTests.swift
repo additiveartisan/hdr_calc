@@ -71,6 +71,16 @@ final class SonyCameraTypesTests: XCTestCase {
         }
     }
 
+    func testConnectionState_wrongMode_equality() {
+        let camera = DiscoveredCamera(id: "test", name: "Alpha 7R V", address: "192.168.1.1")
+        let state1 = ConnectionState.wrongMode(camera, .aperturePriority)
+        let state2 = ConnectionState.wrongMode(camera, .aperturePriority)
+        XCTAssertEqual(state1, state2)
+
+        let state3 = ConnectionState.wrongMode(camera, .programAuto)
+        XCTAssertNotEqual(state1, state3)
+    }
+
     // MARK: - ShootingResult
 
     func testShootingResult_success() {
@@ -98,5 +108,19 @@ final class SonyCameraTypesTests: XCTestCase {
         let warning = SpeedWarning(message: "Slow shutter speeds may cause blur", severity: .caution)
         XCTAssertEqual(warning.message, "Slow shutter speeds may cause blur")
         XCTAssertEqual(warning.severity, .caution)
+    }
+
+    // MARK: - FrameStatus
+
+    func testFrameStatus_settingShutter() {
+        let status = FrameStatus.settingShutter(speeds[12])
+        XCTAssertEqual(status, .settingShutter(speeds[12]))
+        XCTAssertNotEqual(status, .settingShutter(speeds[0]))
+    }
+
+    func testFrameStatus_verifyingShutter() {
+        let status = FrameStatus.verifyingShutter(attempt: 2, maxAttempts: 3)
+        XCTAssertEqual(status, .verifyingShutter(attempt: 2, maxAttempts: 3))
+        XCTAssertNotEqual(status, .verifyingShutter(attempt: 1, maxAttempts: 3))
     }
 }
