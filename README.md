@@ -14,18 +14,12 @@
   <a href="#how-it-works">How It Works</a>&ensp;&ensp;|&ensp;&ensp;<a href="#web">Web</a>&ensp;&ensp;|&ensp;&ensp;<a href="#ios">iOS</a>&ensp;&ensp;|&ensp;&ensp;<a href="#privacy">Privacy</a>
 </p>
 
-<br>
-
 <p align="center">
   <img src="ios/screenshot_light.png" width="260" alt="HDR Calc light mode">&emsp;&emsp;
   <img src="ios/screenshot_dark.png" width="260" alt="HDR Calc dark mode">
 </p>
 
-<br>
-
 Set your shadow and highlight speeds, pick your AEB frame count and EV spacing, and the app instantly shows every bracket set you need to capture. Built for real estate, architecture, landscape, and interior photography.
-
-<br>
 
 > **1/3-stop scale** from 1/8000s to 30s&ensp;&ensp;·&ensp;&ensp;**3, 5, 7, or 9** AEB frames&ensp;&ensp;·&ensp;&ensp;**1 / 1.5 / 2** EV spacing
 >
@@ -33,11 +27,7 @@ Set your shadow and highlight speeds, pick your AEB frame count and EV spacing, 
 >
 > **Web** (offline PWA)&ensp;&ensp;+&ensp;&ensp;**iOS** (SwiftUI)
 
-<br>
-
 ---
-
-<br>
 
 ## How It Works
 
@@ -65,11 +55,7 @@ Meter the brightest and darkest parts of your scene. HDR Calc figures out the re
 
 Adjacent sets overlap by one frame. No tonal gaps. The algorithm rounds toward darker exposures for extra safety margin.
 
-<br>
-
 ---
-
-<br>
 
 ## Web
 
@@ -90,11 +76,7 @@ Installable as a home screen app on any device.
 | Tests | Vitest (`npm test`) |
 | Build | Vite (`npm run build`) |
 
-<br>
-
 ---
-
-<br>
 
 ## iOS
 
@@ -108,15 +90,10 @@ Native SwiftUI app targeting iOS 17+. Single-screen layout on iPhone, two-column
 
 **Accessibility** &ensp; VoiceOver, Dynamic Type, and Reduced Motion support. Adaptive light and dark appearance.
 
-<br>
-
 ---
-
-<br>
 
 <details>
 <summary><strong>Project Structure</strong></summary>
-
 <br>
 
 ```
@@ -161,11 +138,7 @@ Both implementations validate against the same `test_vectors.json` to guarantee 
 
 </details>
 
-<br>
-
 ---
-
-<br>
 
 ## Privacy
 
@@ -173,11 +146,7 @@ No data collected. No analytics, no tracking, no network requests.
 
 Camera access (iOS) is used solely for real-time exposure metering. No frames are recorded or transmitted.
 
-<br>
-
 ---
-
-<br>
 
 <p align="center">
   No ads&ensp;&ensp;·&ensp;&ensp;No subscriptions&ensp;&ensp;·&ensp;&ensp;No account
