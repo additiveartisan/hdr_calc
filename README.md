@@ -15,8 +15,10 @@
 </p>
 
 <p align="center">
-  <img src="ios/screenshot_light.png" width="260" alt="HDR Calc light mode">&emsp;&emsp;
-  <img src="ios/screenshot_dark.png" width="260" alt="HDR Calc dark mode">
+  <img src="ios/screenshot_main.png" width="180" alt="Set your speeds">&ensp;
+  <img src="ios/screenshot_brackets.png" width="180" alt="See your bracket sets">&ensp;
+  <img src="ios/screenshot_shooting.png" width="180" alt="Shooting in progress">&ensp;
+  <img src="ios/screenshot_complete.png" width="180" alt="All frames captured">
 </p>
 
 Set your shadow and highlight speeds, pick your AEB frame count and EV spacing, and the app instantly shows every bracket set you need to capture. Built for real estate, architecture, landscape, and interior photography.
