@@ -107,16 +107,6 @@ enum ShootingResult: Equatable {
     case partial(framesCaptured: Int, totalExpected: Int)
     case cancelled
     case failed(String)
-
-    static func == (lhs: ShootingResult, rhs: ShootingResult) -> Bool {
-        switch (lhs, rhs) {
-        case (.success(let a), .success(let b)): a == b
-        case (.partial(let ac, let at), .partial(let bc, let bt)): ac == bc && at == bt
-        case (.cancelled, .cancelled): true
-        case (.failed(let a), .failed(let b)): a == b
-        default: false
-        }
-    }
 }
 
 struct SpeedWarning: Equatable {
