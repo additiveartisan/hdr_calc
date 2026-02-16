@@ -1,5 +1,24 @@
 import Foundation
 
+// MARK: - Exposure Mode
+
+enum ExposureMode: Equatable {
+    case manual
+    case aperturePriority
+    case shutterPriority
+    case programAuto
+    case unknown
+}
+
+// MARK: - Camera Hardware Errors
+
+enum CameraHardwareError: Error, Equatable {
+    case shutterSpeedMismatch(requested: String, actual: String)
+    case captureTimeout
+    case wrongExposureMode(ExposureMode)
+    case disconnected
+}
+
 // MARK: - Connection
 
 enum ConnectionState: Equatable {
@@ -8,6 +27,7 @@ enum ConnectionState: Equatable {
     case connecting(DiscoveredCamera)
     case modeCheck(DiscoveredCamera)
     case connected(DiscoveredCamera)
+    case wrongMode(DiscoveredCamera, ExposureMode)
     case error(String)
 
     static func == (lhs: ConnectionState, rhs: ConnectionState) -> Bool {
@@ -17,6 +37,7 @@ enum ConnectionState: Equatable {
         case (.connecting(let a), .connecting(let b)): a.id == b.id
         case (.modeCheck(let a), .modeCheck(let b)): a.id == b.id
         case (.connected(let a), .connected(let b)): a.id == b.id
+        case (.wrongMode(let ac, let am), .wrongMode(let bc, let bm)): ac.id == bc.id && am == bm
         case (.error(let a), .error(let b)): a == b
         default: false
         }
