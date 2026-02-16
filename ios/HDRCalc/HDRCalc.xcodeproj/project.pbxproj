@@ -116,6 +116,7 @@
 				A10000020000000000000023 /* CameraConnectView.swift */,
 				A10000020000000000000024 /* ShootConfirmView.swift */,
 				A10000020000000000000025 /* ShootProgressView.swift */,
+				A10000020000000000000030 /* ShutterSpeedMapping.swift */,
 				A10000020000000000000003 /* Assets.xcassets */,
 			);
 			path = HDRCalc;
