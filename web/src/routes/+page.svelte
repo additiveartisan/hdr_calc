@@ -370,4 +370,84 @@
 		color: var(--text);
 	}
 
+	.overlay {
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.5);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 100;
+		padding: var(--page-padding);
+	}
+
+	.modal {
+		background: var(--bg);
+		border: 1px solid var(--card-border);
+		border-radius: var(--card-radius);
+		max-width: 420px;
+		width: 100%;
+		padding: 24px;
+	}
+
+	.modal-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 20px;
+	}
+
+	.modal-title {
+		font-weight: 600;
+		font-size: 17px;
+	}
+
+	.modal-close {
+		background: none;
+		border: none;
+		color: var(--text-muted);
+		font-size: 22px;
+		cursor: pointer;
+		line-height: 1;
+		padding: 0 4px;
+	}
+
+	.modal-close:hover {
+		color: var(--text);
+	}
+
+	.steps {
+		list-style: none;
+		counter-reset: step;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.steps li {
+		counter-increment: step;
+		font-size: 14px;
+		line-height: 1.5;
+		color: var(--text);
+		padding-left: 32px;
+		position: relative;
+	}
+
+	.steps li::before {
+		content: counter(step);
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 22px;
+		height: 22px;
+		border-radius: 50%;
+		background: var(--accent-soft);
+		color: var(--accent);
+		font-weight: 600;
+		font-size: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
 </style>
