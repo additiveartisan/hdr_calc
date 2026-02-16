@@ -403,11 +403,6 @@ struct HelpView: View {
             }
             .navigationTitle("How to Use")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") { dismiss() }
-                }
-            }
         }
     }
 }
