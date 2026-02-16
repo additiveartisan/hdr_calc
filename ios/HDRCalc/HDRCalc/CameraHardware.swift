@@ -10,9 +10,13 @@ protocol CameraHardwareProtocol: Sendable {
 final class StubCameraHardware: CameraHardwareProtocol, @unchecked Sendable {
     var exposureMode: ExposureMode = .manual
     var shouldFailVerify = false
-    var delay: Duration = .milliseconds(50)
+    var delay: Duration
 
     private var currentSpeed: ShutterSpeed?
+
+    init(delay: Duration = .milliseconds(50)) {
+        self.delay = delay
+    }
 
     func readExposureMode() async throws -> ExposureMode {
         if delay > .zero { try? await Task.sleep(for: delay) }
