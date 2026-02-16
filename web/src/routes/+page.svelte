@@ -33,6 +33,8 @@
 	function centerIndex(setLength: number): number {
 		return Math.floor(setLength / 2);
 	}
+
+	let showHelp = $state(false);
 </script>
 
 <main>
