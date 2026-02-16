@@ -149,12 +149,18 @@ Native SwiftUI app targeting iOS 17+. Single-screen layout on iPhone, two-column
 - Wheel pickers for the full 55-value shutter speed scale
 - Live camera metering with tap-to-expose
 - Tick-mark ruler visualization for each bracket set
+- Sony camera control: connect via Wi-Fi, set shutter speeds, and fire the shutter remotely
+- Automated shooting loop with per-frame progress tracking
 - Adaptive light and dark appearance
 - VoiceOver, Dynamic Type, and Reduced Motion support
 
 #### Camera Metering
 
 Tap the meter button next to either speed picker to open a live camera view. Point at the scene, tap to set the metering point, and the app reads the exposure directly from the camera sensor, mapped to the nearest 1/3-stop value.
+
+#### Sony Camera Control
+
+Connect to a supported Sony camera over Wi-Fi. The app sets each shutter speed, verifies the setting, and fires the shutter automatically for every frame in your bracket sets. A progress ring tracks completed frames. If a shutter speed fails to verify after retries, the loop stops and reports partial progress so you can reconnect and continue.
 
 <br>
 
