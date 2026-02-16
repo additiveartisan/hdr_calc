@@ -134,8 +134,8 @@
 </main>
 
 {#if showHelp}
-<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-<div class="overlay" role="dialog" aria-label="How to use HDR Calc" onclick={() => showHelp = false} onkeydown={(e) => e.key === 'Escape' && (showHelp = false)}>
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions a11y_interactive_supports_focus -->
+<div class="overlay" role="dialog" aria-label="How to use HDR Calc" tabindex="-1" onclick={() => showHelp = false} onkeydown={(e) => e.key === 'Escape' && (showHelp = false)}>
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div class="modal" onclick={(e) => e.stopPropagation()} onkeydown={() => {}}>
 		<div class="modal-header">
