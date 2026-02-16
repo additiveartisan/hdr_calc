@@ -28,6 +28,7 @@
 		A10000010000000000000026 /* SonyCameraTypesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000026 /* SonyCameraTypesTests.swift */; };
 		A10000010000000000000027 /* CameraConnectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000027 /* CameraConnectionServiceTests.swift */; };
 		A10000010000000000000028 /* ShootingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000028 /* ShootingViewModelTests.swift */; };
+		A10000010000000000000029 /* CameraHardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000029 /* CameraHardware.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
