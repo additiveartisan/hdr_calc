@@ -253,6 +253,7 @@
 				A10000010000000000000023 /* CameraConnectView.swift in Sources */,
 				A10000010000000000000024 /* ShootConfirmView.swift in Sources */,
 				A10000010000000000000025 /* ShootProgressView.swift in Sources */,
+				A10000010000000000000029 /* CameraHardware.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
