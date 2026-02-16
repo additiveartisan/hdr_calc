@@ -260,6 +260,7 @@
 				A10000010000000000000024 /* ShootConfirmView.swift in Sources */,
 				A10000010000000000000025 /* ShootProgressView.swift in Sources */,
 				A10000010000000000000029 /* CameraHardware.swift in Sources */,
+				A10000010000000000000030 /* ShutterSpeedMapping.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
