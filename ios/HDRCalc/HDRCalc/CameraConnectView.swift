@@ -149,6 +149,26 @@ struct CameraConnectView: View {
         }
     }
 
+    private func wrongModeView(camera: DiscoveredCamera) -> some View {
+        VStack(spacing: Theme.sectionGap) {
+            Spacer()
+            Image(systemName: "dial.low.fill")
+                .font(.system(size: 48))
+                .foregroundStyle(.orange)
+            Text("Set Camera to Manual Mode")
+                .font(.title3.weight(.semibold))
+            Text("Bracketed shooting requires the camera dial set to M (Manual) so shutter speed can be controlled remotely.")
+                .multilineTextAlignment(.center)
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, Theme.pagePadding)
+            Button("Check Again") {
+                service.retryModeCheck()
+            }
+            .buttonStyle(.bordered)
+            Spacer()
+        }
+    }
+
     private func errorView(message: String) -> some View {
         VStack(spacing: Theme.sectionGap) {
             Spacer()
