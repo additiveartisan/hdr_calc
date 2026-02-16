@@ -3,11 +3,13 @@ import XCTest
 
 final class CameraConnectionServiceTests: XCTestCase {
 
+    private var hardware: StubCameraHardware!
     private var service: CameraConnectionService!
 
     override func setUp() {
         super.setUp()
-        service = CameraConnectionService()
+        hardware = StubCameraHardware(delay: .zero)
+        service = CameraConnectionService(hardware: hardware)
     }
 
     // MARK: - Initial State
@@ -108,5 +110,85 @@ final class CameraConnectionServiceTests: XCTestCase {
         service._setStateForTesting(.error("Failed"))
         service.retry()
         XCTAssertEqual(service.connectionState, .discovering)
+    }
+
+    // MARK: - Mode Check (async)
+
+    @MainActor
+    func testConnect_manualMode_connects() async throws {
+        hardware.exposureMode = .manual
+        let camera = DiscoveredCamera(id: "test", name: "Alpha 7R V", address: "192.168.1.1")
+        service.connect(to: camera)
+
+        for _ in 0..<200 {
+            if service.isConnected { break }
+            try await Task.sleep(for: .milliseconds(20))
+        }
+
+        XCTAssertEqual(service.connectionState, .connected(camera))
+    }
+
+    @MainActor
+    func testConnect_wrongMode_showsWrongMode() async throws {
+        hardware.exposureMode = .aperturePriority
+        let camera = DiscoveredCamera(id: "test", name: "Alpha 7R V", address: "192.168.1.1")
+        service.connect(to: camera)
+
+        for _ in 0..<200 {
+            if case .wrongMode = service.connectionState { break }
+            try await Task.sleep(for: .milliseconds(20))
+        }
+
+        XCTAssertEqual(service.connectionState, .wrongMode(camera, .aperturePriority))
+    }
+
+    @MainActor
+    func testConnect_modeCheckThrows_showsError() async throws {
+        // Create a throwing hardware stub
+        let throwingHardware = ThrowingStubCameraHardware()
+        let throwingService = CameraConnectionService(hardware: throwingHardware)
+        let camera = DiscoveredCamera(id: "test", name: "Alpha 7R V", address: "192.168.1.1")
+        throwingService.connect(to: camera)
+
+        for _ in 0..<200 {
+            if case .error = throwingService.connectionState { break }
+            try await Task.sleep(for: .milliseconds(20))
+        }
+
+        XCTAssertEqual(throwingService.connectionState, .error("Could not read camera mode"))
+    }
+
+    @MainActor
+    func testRetryModeCheck_succeeds() async throws {
+        hardware.exposureMode = .aperturePriority
+        let camera = DiscoveredCamera(id: "test", name: "Alpha 7R V", address: "192.168.1.1")
+        service._setStateForTesting(.wrongMode(camera, .aperturePriority))
+
+        // Switch to manual, then retry
+        hardware.exposureMode = .manual
+        service.retryModeCheck()
+
+        for _ in 0..<200 {
+            if service.isConnected { break }
+            try await Task.sleep(for: .milliseconds(20))
+        }
+
+        XCTAssertEqual(service.connectionState, .connected(camera))
+    }
+}
+
+// Helper: a hardware stub that always throws
+private final class ThrowingStubCameraHardware: CameraHardwareProtocol, @unchecked Sendable {
+    func readExposureMode() async throws -> ExposureMode {
+        throw CameraHardwareError.disconnected
+    }
+    func setShutterSpeed(_ speed: ShutterSpeed) async throws {
+        throw CameraHardwareError.disconnected
+    }
+    func readShutterSpeed() async throws -> ShutterSpeed {
+        throw CameraHardwareError.disconnected
+    }
+    func captureAndWaitForBuffer() async throws {
+        throw CameraHardwareError.disconnected
     }
 }
