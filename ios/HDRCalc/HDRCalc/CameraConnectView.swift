@@ -21,6 +21,8 @@ struct CameraConnectView: View {
                     modeCheckView(camera: camera)
                 case .connected(let camera):
                     connectedView(camera: camera)
+                case .wrongMode(let camera, _):
+                    wrongModeView(camera: camera)
                 case .error(let message):
                     errorView(message: message)
                 }
