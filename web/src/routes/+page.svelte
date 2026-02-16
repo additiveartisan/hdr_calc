@@ -133,6 +133,25 @@
 	</footer>
 </main>
 
+{#if showHelp}
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+<div class="overlay" role="dialog" aria-label="How to use HDR Calc" onclick={() => showHelp = false} onkeydown={(e) => e.key === 'Escape' && (showHelp = false)}>
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<div class="modal" onclick={(e) => e.stopPropagation()} onkeydown={() => {}}>
+		<div class="modal-header">
+			<span class="modal-title">How to Use</span>
+			<button class="modal-close" aria-label="Close" onclick={() => showHelp = false}>&times;</button>
+		</div>
+		<ol class="steps">
+			<li><strong>Meter your shadows.</strong> Point your camera at the darkest area you want detail in and note the shutter speed. Set it under Shadows.</li>
+			<li><strong>Meter your highlights.</strong> Point at the brightest area and note that shutter speed. Set it under Highlights.</li>
+			<li><strong>Match your camera's AEB settings.</strong> Set AEB Frames and EV Spacing to match what your camera supports.</li>
+			<li><strong>Read the results.</strong> The calculator shows how many bracket sets you need and the center shutter speed for each set.</li>
+		</ol>
+	</div>
+</div>
+{/if}
+
 <style>
 	main {
 		max-width: 960px;
