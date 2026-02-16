@@ -191,4 +191,7 @@ private final class ThrowingStubCameraHardware: CameraHardwareProtocol, @uncheck
     func captureAndWaitForBuffer() async throws {
         throw CameraHardwareError.disconnected
     }
+    func readAvailableSpeeds() async throws -> [ShutterSpeed] {
+        throw CameraHardwareError.disconnected
+    }
 }
