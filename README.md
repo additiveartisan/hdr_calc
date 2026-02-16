@@ -92,54 +92,6 @@ Native SwiftUI app targeting iOS 17+. Single-screen layout on iPhone, two-column
 
 ---
 
-<details>
-<summary><strong>Project Structure</strong></summary>
-<br>
-
-```
-hdr_calc/
-  test_vectors.json                      ← shared parity contract
-  web/
-    src/
-      lib/
-        calculator.ts                    core algorithm
-        speeds.ts                        shutter speed table
-        components/                      UI components
-      routes/
-        +page.svelte                     main interface
-        privacy/                         privacy policy
-  ios/
-    HDRCalc/
-      HDRCalcApp.swift                   app entry point
-      Calculator.swift                   core algorithm (Swift port)
-      Speeds.swift                       speed table + nearestSpeed()
-      Theme.swift                        colors + spacing constants
-      ContentView.swift                  main UI
-      CameraService.swift                AVCaptureSession + metering
-      MeterView.swift                    camera preview sheet
-      CameraHardware.swift               hardware protocol + stub
-      CameraConnectionService.swift      Sony Wi-Fi discovery + connection
-      CameraConnectView.swift            connection UI
-      SonyCameraTypes.swift              phases, progress, results
-      ShutterSpeedMapping.swift          Sony API ↔ ShutterSpeed
-      ShootingViewModel.swift            shooting loop state machine
-      ShootConfirmView.swift             pre-shoot confirmation
-      ShootProgressView.swift            progress ring + completion UI
-    HDRCalcTests/
-      SpeedsTests.swift                  speed table + lookup
-      CalculatorTests.swift              test vector parity
-      ShootingViewModelTests.swift       shooting loop + retries
-      SonyCameraTypesTests.swift         type + progress models
-      ShutterSpeedMappingTests.swift     Sony mapping roundtrip
-      CameraConnectionServiceTests.swift connection states
-```
-
-Both implementations validate against the same `test_vectors.json` to guarantee parity.
-
-</details>
-
----
-
 ## Privacy
 
 No data collected. No analytics, no tracking, no network requests.
