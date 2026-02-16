@@ -66,6 +66,8 @@
 		A10000020000000000000027 /* CameraConnectionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraConnectionServiceTests.swift; sourceTree = "<group>"; };
 		A10000020000000000000028 /* ShootingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootingViewModelTests.swift; sourceTree = "<group>"; };
 		A10000020000000000000029 /* CameraHardware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHardware.swift; sourceTree = "<group>"; };
+		A10000020000000000000030 /* ShutterSpeedMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterSpeedMapping.swift; sourceTree = "<group>"; };
+		A10000020000000000000031 /* ShutterSpeedMappingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterSpeedMappingTests.swift; sourceTree = "<group>"; };
 		A10000060000000000000001 /* HDRCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HDRCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10000060000000000000002 /* HDRCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HDRCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
