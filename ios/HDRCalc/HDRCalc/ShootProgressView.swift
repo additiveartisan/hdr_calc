@@ -171,14 +171,16 @@ struct ShootProgressView: View {
         let text: String? = switch vm.progress.currentFrameStatus {
         case .idle: nil
         case .settingShutter(let speed): "Setting shutter to \(speed.label)"
-        case .verifyingShutter(let attempt, let maxAttempts): "Verifying shutter (attempt \(attempt)/\(maxAttempts))"
+        case .verifyingShutter(let attempt, let maxAttempts): "Retrying shutter verification (\(attempt)/\(maxAttempts))"
         case .capturing(let speed): "Capturing at \(speed.label)"
-        case .waitingForBuffer: "Waiting for camera buffer"
+        case .waitingForBuffer: nil
         }
         if let text {
             Text(text)
                 .font(.caption)
                 .foregroundStyle(.secondary)
+                .contentTransition(.numericText())
+                .animation(.easeInOut(duration: 0.2), value: text)
         }
     }
 
