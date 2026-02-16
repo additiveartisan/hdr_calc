@@ -139,6 +139,19 @@ struct ContentView: View {
             Rectangle()
                 .frame(height: 1)
                 .foregroundStyle(.cardBorder)
+            Button {
+                showHelp = true
+            } label: {
+                Text("?")
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(.secondary)
+                    .frame(width: 24, height: 24)
+                    .overlay(
+                        Circle()
+                            .stroke(.cardBorder, lineWidth: 1)
+                    )
+            }
+            .buttonStyle(.plain)
         }
     }
 
