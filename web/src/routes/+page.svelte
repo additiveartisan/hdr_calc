@@ -37,7 +37,7 @@
 	let showHelp = $state(false);
 </script>
 
-<svelte:window onkeydown={(e) => e.key === 'Escape' && showHelp && (showHelp = false)} />
+<svelte:window onkeydown={(e) => { if (e.key === 'Escape' && showHelp) { showHelp = false; (document.activeElement as HTMLElement)?.blur(); }}} />
 
 <main>
 	<div class="layout">
