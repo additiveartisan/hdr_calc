@@ -366,8 +366,6 @@ struct SetRulerView: View {
 // MARK: - Help View
 
 struct HelpView: View {
-    @Environment(\.dismiss) private var dismiss
-
     private let steps: [(String, String)] = [
         ("Meter your shadows.", "Point your camera at the darkest area you want detail in and note the shutter speed. Set it under Shadows."),
         ("Meter your highlights.", "Point at the brightest area and note that shutter speed. Set it under Highlights."),
