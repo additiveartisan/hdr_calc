@@ -98,11 +98,7 @@ final class ShootingViewModel {
     }
 
     func dismiss() {
-        shootingTask?.cancel()
-        shootingTask = nil
-        phase = .idle
-        progress = .zero
-        activeSets = []
+        cancel()
     }
 
     // MARK: - Shooting Loop
