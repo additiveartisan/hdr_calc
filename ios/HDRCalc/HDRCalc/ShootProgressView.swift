@@ -164,6 +164,32 @@ struct ShootProgressView: View {
         }
     }
 
+    // MARK: - Frame Status
+
+    @ViewBuilder
+    private var frameStatusLabel: some View {
+        switch vm.progress.currentFrameStatus {
+        case .idle:
+            EmptyView()
+        case .settingShutter(let speed):
+            Text("Setting shutter to \(speed.label)")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        case .verifyingShutter(let attempt, let maxAttempts):
+            Text("Verifying shutter (attempt \(attempt)/\(maxAttempts))")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        case .capturing(let speed):
+            Text("Capturing at \(speed.label)")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        case .waitingForBuffer:
+            Text("Waiting for camera buffer")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+    }
+
     // MARK: - Progress Ring
 
     private var progressRing: some View {
