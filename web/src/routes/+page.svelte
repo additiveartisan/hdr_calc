@@ -378,7 +378,7 @@
 		align-items: flex-start;
 		justify-content: center;
 		z-index: 100;
-		padding: 72px var(--page-padding) var(--page-padding);
+		padding: 120px var(--page-padding) var(--page-padding);
 	}
 
 	.modal {
