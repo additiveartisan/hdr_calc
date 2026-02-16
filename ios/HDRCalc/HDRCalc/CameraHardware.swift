@@ -42,4 +42,9 @@ final class StubCameraHardware: CameraHardwareProtocol, @unchecked Sendable {
     func captureAndWaitForBuffer() async throws {
         if delay > .zero { try? await Task.sleep(for: delay) }
     }
+
+    func readAvailableSpeeds() async throws -> [ShutterSpeed] {
+        if delay > .zero { try? await Task.sleep(for: delay) }
+        return speeds
+    }
 }
