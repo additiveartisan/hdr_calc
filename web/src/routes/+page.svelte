@@ -40,7 +40,11 @@
 <main>
 	<div class="layout">
 		<div class="inputs">
-			<h1 class="title">HDR Calc</h1>
+			<h1 class="title">
+				HDR Calc
+				<span class="title-rule"></span>
+				<button class="help-btn" aria-label="How to use" onclick={() => showHelp = true}>?</button>
+			</h1>
 
 			<SpeedPicker
 				label="Shadows"
