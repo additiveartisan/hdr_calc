@@ -55,18 +55,12 @@ final class ShootingViewModel {
     // MARK: - Speed Warnings
 
     func speedWarnings(for sets: [[ShutterSpeed]]) -> [SpeedWarning] {
-        var warnings: [SpeedWarning] = []
-        let allSpeeds = sets.flatMap { $0 }
-        let maxSeconds = allSpeeds.map(\.seconds).max() ?? 0
-
-        if maxSeconds >= 10 {
-            warnings.append(SpeedWarning(
-                message: "Exposures over 10s: use a sturdy tripod and remote trigger",
-                severity: .caution
-            ))
-        }
-
-        return warnings
+        let maxSeconds = sets.flatMap { $0 }.map(\.seconds).max() ?? 0
+        guard maxSeconds >= 10 else { return [] }
+        return [SpeedWarning(
+            message: "Exposures over 10s: use a sturdy tripod and remote trigger",
+            severity: .caution
+        )]
     }
 
     // MARK: - Actions
