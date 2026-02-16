@@ -185,16 +185,28 @@ hdr_calc/
         privacy/            Privacy policy
   ios/
     HDRCalc/
-      HDRCalcApp.swift      App entry point
-      Calculator.swift      Core algorithm (Swift port)
-      Speeds.swift          Speed table + nearestSpeed()
-      Theme.swift           Colors + spacing constants
-      ContentView.swift     Main UI
-      CameraService.swift   AVCaptureSession + metering
-      MeterView.swift       Camera preview sheet
+      HDRCalcApp.swift            App entry point
+      Calculator.swift            Core algorithm (Swift port)
+      Speeds.swift                Speed table + nearestSpeed()
+      Theme.swift                 Colors + spacing constants
+      ContentView.swift           Main UI
+      CameraService.swift         AVCaptureSession + metering
+      MeterView.swift             Camera preview sheet
+      CameraHardware.swift        Camera hardware protocol + stub
+      CameraConnectionService.swift  Sony Wi-Fi discovery + connection
+      CameraConnectView.swift     Connection UI
+      SonyCameraTypes.swift       Shared types (phases, progress, results)
+      ShutterSpeedMapping.swift   Sony API value <-> ShutterSpeed mapping
+      ShootingViewModel.swift     Shooting loop state machine
+      ShootConfirmView.swift      Pre-shoot confirmation screen
+      ShootProgressView.swift     Progress ring + completion UI
     HDRCalcTests/
-      SpeedsTests.swift     Speed table + lookup tests
-      CalculatorTests.swift Test vector parity tests
+      SpeedsTests.swift               Speed table + lookup tests
+      CalculatorTests.swift            Test vector parity tests
+      ShootingViewModelTests.swift     Shooting loop + retry tests
+      SonyCameraTypesTests.swift       Type + progress model tests
+      ShutterSpeedMappingTests.swift   Sony mapping roundtrip tests
+      CameraConnectionServiceTests.swift  Connection state tests
 ```
 
 Both implementations validate against the same `test_vectors.json` to guarantee parity.
