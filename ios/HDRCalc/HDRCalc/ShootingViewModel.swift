@@ -1,12 +1,24 @@
 import Foundation
+import os
+
+private let logger = Logger(subsystem: "com.hdr-calc", category: "ShootingViewModel")
 
 @Observable
 final class ShootingViewModel {
     var phase: ShootingPhase = .idle
     var progress: ShootingProgress = .zero
 
+    static let perFrameOverheadSeconds: Double = 2.5
+    static let maxShutterRetries: Int = 3
+    static let retryDelay: Duration = .milliseconds(300)
+
+    private let hardware: any CameraHardwareProtocol
     private var activeSets: [[ShutterSpeed]] = []
-    private var simulationTask: Task<Void, Never>?
+    private var shootingTask: Task<Void, Never>?
+
+    init(hardware: any CameraHardwareProtocol = StubCameraHardware()) {
+        self.hardware = hardware
+    }
 
     var isShooting: Bool {
         phase == .shooting
@@ -25,9 +37,8 @@ final class ShootingViewModel {
 
     func estimatedTime(for sets: [[ShutterSpeed]]) -> Int {
         guard !sets.isEmpty else { return 0 }
-        // Sum all shutter speeds plus 1.5s overhead per frame for PTP command round-trip
         let totalSeconds = sets.flatMap { $0 }.reduce(0.0) { sum, speed in
-            sum + speed.seconds + 1.5
+            sum + speed.seconds + Self.perFrameOverheadSeconds
         }
         return Int(totalSeconds.rounded(.up))
     }
@@ -70,12 +81,12 @@ final class ShootingViewModel {
             totalSets: sets.count
         )
         phase = .shooting
-        simulateProgress(sets: sets)
+        executeShootingLoop(sets: sets)
     }
 
     func cancel() {
-        simulationTask?.cancel()
-        simulationTask = nil
+        shootingTask?.cancel()
+        shootingTask = nil
         phase = .idle
         progress = .zero
         activeSets = []
@@ -83,35 +94,131 @@ final class ShootingViewModel {
 
     func retryRemaining() {
         phase = .shooting
-        simulateProgress(sets: activeSets)
+        executeShootingLoop(sets: activeSets)
     }
 
     func dismiss() {
-        simulationTask?.cancel()
-        simulationTask = nil
+        shootingTask?.cancel()
+        shootingTask = nil
         phase = .idle
         progress = .zero
         activeSets = []
     }
 
-    // Stub: simulate frames ticking through for demo purposes
-    private func simulateProgress(sets: [[ShutterSpeed]]) {
-        simulationTask?.cancel()
-        simulationTask = Task { @MainActor in
+    // MARK: - Shooting Loop
+
+    private func executeShootingLoop(sets: [[ShutterSpeed]]) {
+        shootingTask?.cancel()
+        shootingTask = Task { @MainActor in
+            // Pre-shoot mode check
+            do {
+                let mode = try await hardware.readExposureMode()
+                if mode != .manual {
+                    phase = .complete(.failed("Camera is not in Manual mode"))
+                    return
+                }
+            } catch is CancellationError {
+                return
+            } catch {
+                phase = .complete(.failed("Camera disconnected. Reconnect and retry."))
+                return
+            }
+
             var completed = progress.completedFrames
+            var completedSets = 0
+
             for (setIndex, set) in sets.enumerated() {
                 guard !Task.isCancelled, phase == .shooting else { return }
                 progress.currentSet = setIndex + 1
-                for _ in set {
+                var setSucceeded = true
+
+                for speed in set {
                     guard !Task.isCancelled, phase == .shooting else { return }
-                    try? await Task.sleep(for: .milliseconds(400))
-                    guard !Task.isCancelled, phase == .shooting else { return }
+
+                    // 1. Set shutter speed
+                    progress.currentFrameStatus = .settingShutter(speed)
+                    do {
+                        try await hardware.setShutterSpeed(speed)
+                    } catch is CancellationError {
+                        return
+                    } catch {
+                        logger.error("Failed to set shutter speed \(speed.label): \(error.localizedDescription)")
+                        setSucceeded = false
+                        break
+                    }
+
+                    // 2. Verify with retry
+                    var verified = false
+                    for attempt in 1...Self.maxShutterRetries {
+                        guard !Task.isCancelled, phase == .shooting else { return }
+                        progress.currentFrameStatus = .verifyingShutter(attempt: attempt, maxAttempts: Self.maxShutterRetries)
+
+                        try? await Task.sleep(for: Self.retryDelay)
+                        guard !Task.isCancelled, phase == .shooting else { return }
+
+                        do {
+                            let readBack = try await hardware.readShutterSpeed()
+                            if readBack.index == speed.index {
+                                verified = true
+                                break
+                            }
+                            logger.warning("Shutter verify mismatch: requested \(speed.label), got \(readBack.label) (attempt \(attempt)/\(Self.maxShutterRetries))")
+                        } catch is CancellationError {
+                            return
+                        } catch let error as CameraHardwareError where error == .disconnected {
+                            phase = .complete(.failed("Camera disconnected. Reconnect and retry."))
+                            return
+                        } catch {
+                            logger.error("Shutter verify read failed: \(error.localizedDescription)")
+                            setSucceeded = false
+                            break
+                        }
+                    }
+
+                    if !verified {
+                        logger.error("Shutter speed verification failed after \(Self.maxShutterRetries) attempts for \(speed.label)")
+                        setSucceeded = false
+                        break
+                    }
+
+                    // 3. Capture
+                    progress.currentFrameStatus = .capturing(speed)
+                    do {
+                        try await hardware.captureAndWaitForBuffer()
+                    } catch is CancellationError {
+                        return
+                    } catch let error as CameraHardwareError where error == .disconnected {
+                        phase = .complete(.failed("Camera disconnected. Reconnect and retry."))
+                        return
+                    } catch {
+                        logger.error("Capture failed for \(speed.label): \(error.localizedDescription)")
+                        setSucceeded = false
+                        break
+                    }
+
+                    progress.currentFrameStatus = .waitingForBuffer
                     completed += 1
                     progress.completedFrames = completed
                 }
+
+                if setSucceeded {
+                    completedSets += 1
+                } else {
+                    // A set with gaps is unusable; stop and report partial
+                    break
+                }
             }
+
             guard !Task.isCancelled else { return }
-            phase = .complete(.success(framesCaptured: completed))
+            progress.currentFrameStatus = .idle
+
+            if completedSets == sets.count {
+                phase = .complete(.success(framesCaptured: completed))
+            } else if completedSets > 0 {
+                phase = .complete(.partial(framesCaptured: completed, totalExpected: progress.totalFrames))
+            } else {
+                phase = .complete(.failed("All sets failed. Check camera connection and settings."))
+            }
         }
     }
 
