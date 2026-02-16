@@ -37,6 +37,8 @@
 	let showHelp = $state(false);
 </script>
 
+<svelte:window onkeydown={(e) => e.key === 'Escape' && showHelp && (showHelp = false)} />
+
 <main>
 	<div class="layout">
 		<div class="inputs">
