@@ -141,7 +141,9 @@ final class ShootingViewModel {
                     var verified = false
                     for attempt in 1...Self.maxShutterRetries {
                         guard !Task.isCancelled, phase == .shooting else { return }
-                        progress.currentFrameStatus = .verifyingShutter(attempt: attempt, maxAttempts: Self.maxShutterRetries)
+                        if attempt > 1 {
+                            progress.currentFrameStatus = .verifyingShutter(attempt: attempt, maxAttempts: Self.maxShutterRetries)
+                        }
 
                         try? await Task.sleep(for: Self.retryDelay)
                         guard !Task.isCancelled, phase == .shooting else { return }
@@ -186,7 +188,6 @@ final class ShootingViewModel {
                         break
                     }
 
-                    progress.currentFrameStatus = .waitingForBuffer
                     completed += 1
                     progress.completedFrames = completed
                 }
