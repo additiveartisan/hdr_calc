@@ -5,6 +5,7 @@ protocol CameraHardwareProtocol: Sendable {
     func setShutterSpeed(_ speed: ShutterSpeed) async throws
     func readShutterSpeed() async throws -> ShutterSpeed
     func captureAndWaitForBuffer() async throws
+    func readAvailableSpeeds() async throws -> [ShutterSpeed]
 }
 
 final class StubCameraHardware: CameraHardwareProtocol, @unchecked Sendable {
