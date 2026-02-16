@@ -179,8 +179,8 @@ final class ShootingViewModelTests: XCTestCase {
         ]
         vm.startShooting(sets: sets)
 
-        // Wait for the shooting loop to complete
-        for _ in 0..<100 {
+        // Each frame has a retryDelay (300ms) before verify, so 6 frames needs ~2s+
+        for _ in 0..<500 {
             if vm.isComplete { break }
             try await Task.sleep(for: .milliseconds(10))
         }
