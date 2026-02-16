@@ -375,10 +375,10 @@
 		inset: 0;
 		background: rgba(0, 0, 0, 0.5);
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: center;
 		z-index: 100;
-		padding: var(--page-padding);
+		padding: 72px var(--page-padding) var(--page-padding);
 	}
 
 	.modal {
