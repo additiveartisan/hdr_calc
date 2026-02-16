@@ -168,23 +168,15 @@ struct ShootProgressView: View {
 
     @ViewBuilder
     private var frameStatusLabel: some View {
-        switch vm.progress.currentFrameStatus {
-        case .idle:
-            EmptyView()
-        case .settingShutter(let speed):
-            Text("Setting shutter to \(speed.label)")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        case .verifyingShutter(let attempt, let maxAttempts):
-            Text("Verifying shutter (attempt \(attempt)/\(maxAttempts))")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        case .capturing(let speed):
-            Text("Capturing at \(speed.label)")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        case .waitingForBuffer:
-            Text("Waiting for camera buffer")
+        let text: String? = switch vm.progress.currentFrameStatus {
+        case .idle: nil
+        case .settingShutter(let speed): "Setting shutter to \(speed.label)"
+        case .verifyingShutter(let attempt, let maxAttempts): "Verifying shutter (attempt \(attempt)/\(maxAttempts))"
+        case .capturing(let speed): "Capturing at \(speed.label)"
+        case .waitingForBuffer: "Waiting for camera buffer"
+        }
+        if let text {
+            Text(text)
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
