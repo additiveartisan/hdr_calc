@@ -3,32 +3,36 @@ import XCTest
 
 final class ShutterSpeedMappingTests: XCTestCase {
 
+    // Helper to look up a speed by label
+    private func speed(_ label: String) -> ShutterSpeed {
+        let idx = labelToIndex(label)
+        precondition(idx >= 0, "Unknown speed label: \(label)")
+        return speeds[idx]
+    }
+
     // MARK: - shutterspeedComponents: Fraction Format
 
     func testComponents_fraction_1_125() {
-        let speed = speeds[28] // "1/125"
-        let c = shutterspeedComponents(from: speed)
+        let c = shutterspeedComponents(from: speed("1/125"))
         XCTAssertEqual(c.numerator, 1)
         XCTAssertEqual(c.denominator, 125)
     }
 
     func testComponents_fraction_1_8000() {
-        let speed = speeds[0] // "1/8000"
-        let c = shutterspeedComponents(from: speed)
+        let c = shutterspeedComponents(from: speed("1/8000"))
         XCTAssertEqual(c.numerator, 1)
         XCTAssertEqual(c.denominator, 8000)
     }
 
     func testComponents_fraction_1_2() {
-        let speed = speeds[46] // "1/2" (0.5 seconds, NOT a decimal)
-        let c = shutterspeedComponents(from: speed)
+        // "1/2" is a fraction (0.5 seconds), not a decimal seconds label
+        let c = shutterspeedComponents(from: speed("1/2"))
         XCTAssertEqual(c.numerator, 1)
         XCTAssertEqual(c.denominator, 2)
     }
 
     func testComponents_fraction_1_4() {
-        let speed = speeds[43] // "1/4"
-        let c = shutterspeedComponents(from: speed)
+        let c = shutterspeedComponents(from: speed("1/4"))
         XCTAssertEqual(c.numerator, 1)
         XCTAssertEqual(c.denominator, 4)
     }
@@ -36,29 +40,25 @@ final class ShutterSpeedMappingTests: XCTestCase {
     // MARK: - shutterspeedComponents: Whole Seconds
 
     func testComponents_wholeSeconds_1() {
-        let speed = speeds[49] // "1\""
-        let c = shutterspeedComponents(from: speed)
+        let c = shutterspeedComponents(from: speed("1\""))
         XCTAssertEqual(c.numerator, 1)
         XCTAssertEqual(c.denominator, 1)
     }
 
     func testComponents_wholeSeconds_2() {
-        let speed = speeds[52] // "2\""
-        let c = shutterspeedComponents(from: speed)
+        let c = shutterspeedComponents(from: speed("2\""))
         XCTAssertEqual(c.numerator, 2)
         XCTAssertEqual(c.denominator, 1)
     }
 
     func testComponents_wholeSeconds_30() {
-        let speed = speeds[64] // "30\""
-        let c = shutterspeedComponents(from: speed)
+        let c = shutterspeedComponents(from: speed("30\""))
         XCTAssertEqual(c.numerator, 30)
         XCTAssertEqual(c.denominator, 1)
     }
 
     func testComponents_wholeSeconds_5() {
-        let speed = speeds[56] // "5\""
-        let c = shutterspeedComponents(from: speed)
+        let c = shutterspeedComponents(from: speed("5\""))
         XCTAssertEqual(c.numerator, 5)
         XCTAssertEqual(c.denominator, 1)
     }
@@ -66,57 +66,49 @@ final class ShutterSpeedMappingTests: XCTestCase {
     // MARK: - shutterspeedComponents: Decimal Seconds
 
     func testComponents_decimalSeconds_0_3() {
-        let speed = speeds[44] // "0.3\""
-        let c = shutterspeedComponents(from: speed)
+        let c = shutterspeedComponents(from: speed("0.3\""))
         XCTAssertEqual(c.numerator, 3)
         XCTAssertEqual(c.denominator, 10)
     }
 
     func testComponents_decimalSeconds_0_4() {
-        let speed = speeds[45] // "0.4\""
-        let c = shutterspeedComponents(from: speed)
+        let c = shutterspeedComponents(from: speed("0.4\""))
         XCTAssertEqual(c.numerator, 4)
         XCTAssertEqual(c.denominator, 10)
     }
 
     func testComponents_decimalSeconds_0_6() {
-        let speed = speeds[47] // "0.6\""
-        let c = shutterspeedComponents(from: speed)
+        let c = shutterspeedComponents(from: speed("0.6\""))
         XCTAssertEqual(c.numerator, 6)
         XCTAssertEqual(c.denominator, 10)
     }
 
     func testComponents_decimalSeconds_0_8() {
-        let speed = speeds[48] // "0.8\""
-        let c = shutterspeedComponents(from: speed)
+        let c = shutterspeedComponents(from: speed("0.8\""))
         XCTAssertEqual(c.numerator, 8)
         XCTAssertEqual(c.denominator, 10)
     }
 
     func testComponents_decimalSeconds_1_3() {
-        let speed = speeds[50] // "1.3\""
-        let c = shutterspeedComponents(from: speed)
+        let c = shutterspeedComponents(from: speed("1.3\""))
         XCTAssertEqual(c.numerator, 13)
         XCTAssertEqual(c.denominator, 10)
     }
 
     func testComponents_decimalSeconds_1_6() {
-        let speed = speeds[51] // "1.6\""
-        let c = shutterspeedComponents(from: speed)
+        let c = shutterspeedComponents(from: speed("1.6\""))
         XCTAssertEqual(c.numerator, 16)
         XCTAssertEqual(c.denominator, 10)
     }
 
     func testComponents_decimalSeconds_2_5() {
-        let speed = speeds[53] // "2.5\""
-        let c = shutterspeedComponents(from: speed)
+        let c = shutterspeedComponents(from: speed("2.5\""))
         XCTAssertEqual(c.numerator, 25)
         XCTAssertEqual(c.denominator, 10)
     }
 
     func testComponents_decimalSeconds_3_2() {
-        let speed = speeds[54] // "3.2\""
-        let c = shutterspeedComponents(from: speed)
+        let c = shutterspeedComponents(from: speed("3.2\""))
         XCTAssertEqual(c.numerator, 32)
         XCTAssertEqual(c.denominator, 10)
     }
@@ -192,15 +184,15 @@ final class ShutterSpeedMappingTests: XCTestCase {
     // MARK: - validateSpeeds: All Available
 
     func testValidate_allAvailable() {
-        let set1 = [speeds[28], speeds[29], speeds[30]] // 1/125, 1/100, 1/80
+        let set1 = [speed("1/125"), speed("1/100"), speed("1/80")]
         let result = validateSpeeds(sets: [set1], available: speeds)
         XCTAssertTrue(result.allAvailable)
         XCTAssertTrue(result.substitutions.isEmpty)
     }
 
     func testValidate_multipleSet_allAvailable() {
-        let set1 = [speeds[28], speeds[29], speeds[30]]
-        let set2 = [speeds[31], speeds[32], speeds[33]]
+        let set1 = [speed("1/125"), speed("1/100"), speed("1/80")]
+        let set2 = [speed("1/60"), speed("1/50"), speed("1/40")]
         let result = validateSpeeds(sets: [set1, set2], available: speeds)
         XCTAssertTrue(result.allAvailable)
         XCTAssertTrue(result.substitutions.isEmpty)
@@ -211,8 +203,8 @@ final class ShutterSpeedMappingTests: XCTestCase {
     func testValidate_someMissing_findsSubstitutes() {
         // Available speeds: only even-indexed
         let available = speeds.enumerated().compactMap { $0.offset.isMultiple(of: 2) ? $0.element : nil }
-        // Request odd-indexed speed
-        let set1 = [speeds[1]] // "1/6400" (index 1, not in available)
+        // Request odd-indexed speed: "1/6400" (index 1, not in available)
+        let set1 = [speeds[1]]
         let result = validateSpeeds(sets: [set1], available: available)
         XCTAssertFalse(result.allAvailable)
         XCTAssertEqual(result.substitutions.count, 1)
@@ -226,7 +218,7 @@ final class ShutterSpeedMappingTests: XCTestCase {
 
     func testValidate_multipleMissing() {
         // Only provide a small subset of speeds
-        let available = [speeds[0], speeds[10], speeds[20], speeds[30], speeds[40], speeds[50], speeds[60]]
+        let available = [speeds[0], speeds[10], speeds[20], speeds[30], speeds[40], speeds[50]]
         let set1 = [speeds[5], speeds[15], speeds[25]]
         let result = validateSpeeds(sets: [set1], available: available)
         XCTAssertFalse(result.allAvailable)
@@ -242,14 +234,13 @@ final class ShutterSpeedMappingTests: XCTestCase {
         let set2 = [missing]
         let result = validateSpeeds(sets: [set1, set2], available: available)
         XCTAssertFalse(result.allAvailable)
-        // Same speed missing in both sets should only appear once in substitutions
         XCTAssertEqual(result.substitutions.count, 1)
     }
 
     // MARK: - validateSpeeds: Empty Available
 
     func testValidate_emptyAvailable() {
-        let set1 = [speeds[28]]
+        let set1 = [speed("1/125")]
         let result = validateSpeeds(sets: [set1], available: [])
         XCTAssertFalse(result.allAvailable)
         XCTAssertTrue(result.substitutions.isEmpty)
@@ -267,9 +258,9 @@ final class ShutterSpeedMappingTests: XCTestCase {
 
     func testValidate_substitutionPicksNearest() {
         // Available: 1/1000 (index 9) and 1/500 (index 12)
-        let available = [speeds[9], speeds[12]]
-        // Request: 1/800 (index 10) - should pick 1/1000 (closer in seconds)
-        let set1 = [speeds[10]]
+        let available = [speed("1/1000"), speed("1/500")]
+        // Request: 1/800 (index 10), should pick 1/1000 (closer in seconds)
+        let set1 = [speed("1/800")]
         let result = validateSpeeds(sets: [set1], available: available)
         XCTAssertEqual(result.substitutions.count, 1)
         XCTAssertEqual(result.substitutions[0].original.label, "1/800")
