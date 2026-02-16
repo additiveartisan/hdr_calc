@@ -2,15 +2,13 @@ import SwiftUI
 
 @main
 struct HDRCalcApp: App {
-    private let hardware = StubCameraHardware()
     @State private var connectionService: CameraConnectionService
     @State private var shootingVM: ShootingViewModel
 
     init() {
-        let hw = StubCameraHardware()
-        _connectionService = State(initialValue: CameraConnectionService(hardware: hw))
-        _shootingVM = State(initialValue: ShootingViewModel(hardware: hw))
-        hardware = hw
+        let hardware = StubCameraHardware()
+        _connectionService = State(initialValue: CameraConnectionService(hardware: hardware))
+        _shootingVM = State(initialValue: ShootingViewModel(hardware: hardware))
     }
 
     var body: some Scene {
