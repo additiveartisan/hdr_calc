@@ -8,7 +8,7 @@
 	let shadowIndex = $state(labelToIndex('1/4'));
 	let highlightIndex = $state(labelToIndex('1/1000'));
 	let frames = $state(5);
-	let spacing = $state(1);
+	let spacing = $state(2);
 
 
 	let result = $derived(calculate(shadowIndex, highlightIndex, frames, spacing));
