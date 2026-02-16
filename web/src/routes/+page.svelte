@@ -182,11 +182,34 @@
 		gap: 16px;
 	}
 
-	.title::after {
-		content: '';
+	.title-rule {
 		flex: 1;
 		height: 1px;
 		background: var(--card-border);
+	}
+
+	.help-btn {
+		width: 24px;
+		height: 24px;
+		border-radius: 50%;
+		border: 1px solid var(--card-border);
+		background: transparent;
+		color: var(--text-muted);
+		font-family: inherit;
+		font-size: 13px;
+		font-weight: 500;
+		line-height: 1;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		transition: color 0.15s, border-color 0.15s;
+	}
+
+	.help-btn:hover {
+		color: var(--text);
+		border-color: var(--text-muted);
 	}
 
 	.range-stat {
