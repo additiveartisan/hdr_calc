@@ -68,6 +68,10 @@ struct ContentView: View {
                 showProgressCover = true
             }
         }
+        .sheet(isPresented: $showHelp) {
+            HelpView()
+                .presentationDetents([.medium])
+        }
         .fullScreenCover(isPresented: $showProgressCover) {
             ShootProgressView()
         }
