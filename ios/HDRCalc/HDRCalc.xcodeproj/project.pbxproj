@@ -106,6 +106,7 @@
 				A10000020000000000000007 /* CameraService.swift */,
 				A10000020000000000000008 /* MeterView.swift */,
 				A10000020000000000000020 /* SonyCameraTypes.swift */,
+				A10000020000000000000029 /* CameraHardware.swift */,
 				A10000020000000000000021 /* CameraConnectionService.swift */,
 				A10000020000000000000022 /* ShootingViewModel.swift */,
 				A10000020000000000000023 /* CameraConnectView.swift */,
