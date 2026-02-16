@@ -50,19 +50,7 @@ final class CameraConnectionService {
             try? await Task.sleep(for: .seconds(1.0))
             guard case .connecting(let c) = connectionState, c.id == camera.id else { return }
             connectionState = .modeCheck(camera)
-
-            do {
-                let mode = try await hardware.readExposureMode()
-                guard case .modeCheck(let c) = connectionState, c.id == camera.id else { return }
-                if mode == .manual {
-                    connectionState = .connected(camera)
-                } else {
-                    connectionState = .wrongMode(camera, mode)
-                }
-            } catch {
-                guard case .modeCheck(let c) = connectionState, c.id == camera.id else { return }
-                connectionState = .error("Could not read camera mode")
-            }
+            await checkMode(for: camera)
         }
     }
 
@@ -71,18 +59,22 @@ final class CameraConnectionService {
         connectionState = .modeCheck(camera)
 
         Task { @MainActor in
-            do {
-                let mode = try await hardware.readExposureMode()
-                guard case .modeCheck(let c) = connectionState, c.id == camera.id else { return }
-                if mode == .manual {
-                    connectionState = .connected(camera)
-                } else {
-                    connectionState = .wrongMode(camera, mode)
-                }
-            } catch {
-                guard case .modeCheck(let c) = connectionState, c.id == camera.id else { return }
-                connectionState = .error("Could not read camera mode")
+            await checkMode(for: camera)
+        }
+    }
+
+    private func checkMode(for camera: DiscoveredCamera) async {
+        do {
+            let mode = try await hardware.readExposureMode()
+            guard case .modeCheck(let c) = connectionState, c.id == camera.id else { return }
+            if mode == .manual {
+                connectionState = .connected(camera)
+            } else {
+                connectionState = .wrongMode(camera, mode)
             }
+        } catch {
+            guard case .modeCheck(let c) = connectionState, c.id == camera.id else { return }
+            connectionState = .error("Could not read camera mode")
         }
     }
 
