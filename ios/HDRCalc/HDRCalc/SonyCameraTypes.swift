@@ -60,11 +60,31 @@ enum ShootingPhase: Equatable {
     case complete(ShootingResult)
 }
 
+enum FrameStatus: Equatable {
+    case idle
+    case settingShutter(ShutterSpeed)
+    case verifyingShutter(attempt: Int, maxAttempts: Int)
+    case capturing(ShutterSpeed)
+    case waitingForBuffer
+
+    static func == (lhs: FrameStatus, rhs: FrameStatus) -> Bool {
+        switch (lhs, rhs) {
+        case (.idle, .idle): true
+        case (.settingShutter(let a), .settingShutter(let b)): a.index == b.index
+        case (.verifyingShutter(let aa, let am), .verifyingShutter(let ba, let bm)): aa == ba && am == bm
+        case (.capturing(let a), .capturing(let b)): a.index == b.index
+        case (.waitingForBuffer, .waitingForBuffer): true
+        default: false
+        }
+    }
+}
+
 struct ShootingProgress: Equatable {
     var completedFrames: Int
     var totalFrames: Int
     var currentSet: Int
     var totalSets: Int
+    var currentFrameStatus: FrameStatus = .idle
 
     var fractionComplete: Double {
         guard totalFrames > 0 else { return 0 }
