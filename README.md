@@ -46,6 +46,7 @@ Built for real estate, architecture, landscape, and interior photography.
 | **AEB frames** | 3, 5, 7, or 9 per set |
 | **EV spacing** | 1, 1.5, or 2 stops |
 | **Camera metering** | Tap to meter from the scene (iOS) |
+| **Sony camera control** | Connect, set speeds, and shoot remotely (iOS) |
 | **Platforms** | Web (PWA) + iOS (SwiftUI) |
 
 <br>
