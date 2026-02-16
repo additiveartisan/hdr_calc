@@ -71,6 +71,7 @@ struct ContentView: View {
         .sheet(isPresented: $showHelp) {
             HelpView()
                 .presentationDetents([.medium])
+                .presentationDragIndicator(.hidden)
         }
         .fullScreenCover(isPresented: $showProgressCover) {
             ShootProgressView()
