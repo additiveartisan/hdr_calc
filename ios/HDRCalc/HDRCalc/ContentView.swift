@@ -7,7 +7,7 @@ final class CalculatorViewModel {
     var shadowIndex: Int = labelToIndex("1/4")
     var highlightIndex: Int = labelToIndex("1/1000")
     var frames: Int = 5
-    var spacing: Double = 1.0
+    var spacing: Double = 2.0
 
     var result: CalculationResult {
         calculate(
@@ -25,7 +25,13 @@ struct ContentView: View {
     @State private var vm = CalculatorViewModel()
     @Environment(\.horizontalSizeClass) private var sizeClass
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(CameraConnectionService.self) private var connectionService
+    @Environment(ShootingViewModel.self) private var shootingVM
     @State private var meterTarget: MeterTarget?
+    @State private var showConnectSheet = false
+    @State private var showConfirmSheet = false
+    @State private var showProgressCover = false
+    @State private var showHelp = false
 
     private enum MeterTarget: Identifiable {
         case shadow, highlight
@@ -52,6 +58,29 @@ struct ContentView: View {
         .sheet(item: $meterTarget) { target in
             MeterView(selectedIndex: target == .shadow ? $vm.shadowIndex : $vm.highlightIndex)
         }
+        .sheet(isPresented: $showConnectSheet) {
+            CameraConnectView()
+        }
+        .sheet(isPresented: $showConfirmSheet) {
+            ShootConfirmView(sets: vm.result.sets) {
+                showConfirmSheet = false
+                shootingVM.startShooting(sets: vm.result.sets)
+                showProgressCover = true
+            }
+        }
+        .sheet(isPresented: $showHelp) {
+            HelpView()
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.hidden)
+        }
+        .fullScreenCover(isPresented: $showProgressCover) {
+            ShootProgressView()
+        }
+        .onChange(of: shootingVM.phase) { _, newPhase in
+            if case .idle = newPhase {
+                showProgressCover = false
+            }
+        }
         .tint(.accentColor)
         .animation(reduceMotion ? nil : .snappy(duration: 0.25), value: vm.shadowIndex)
         .animation(reduceMotion ? nil : .snappy(duration: 0.25), value: vm.highlightIndex)
@@ -72,7 +101,40 @@ struct ContentView: View {
             segmentedSection(label: "AEB Frames", tag: $vm.frames, options: [(3, "3"), (5, "5"), (7, "7"), (9, "9")])
             Spacer().frame(height: Theme.cardGap)
             segmentedSection(label: "EV Spacing", tag: $vm.spacing, options: [(1.0, "1"), (1.5, "1.5"), (2.0, "2")])
+            Spacer().frame(height: Theme.sectionGap)
+            connectCameraButton
         }
+    }
+
+    private var connectCameraButton: some View {
+        Button {
+            showConnectSheet = true
+        } label: {
+            HStack {
+                Image(systemName: connectionService.isConnected ? "wifi" : "wifi.slash")
+                Text(connectionService.connectedCameraName ?? "Connect Camera")
+            }
+            .font(.subheadline.weight(.medium))
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+        }
+        .buttonStyle(.bordered)
+        .tint(connectionService.isConnected ? .green : .accentColor)
+    }
+
+    private var shootAllSetsButton: some View {
+        Button {
+            showConfirmSheet = true
+        } label: {
+            HStack {
+                Image(systemName: "camera.shutter.button")
+                Text("Shoot All Sets")
+            }
+            .font(.subheadline.weight(.medium))
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+        }
+        .buttonStyle(.bordered)
     }
 
     private var titleRow: some View {
@@ -82,6 +144,19 @@ struct ContentView: View {
             Rectangle()
                 .frame(height: 1)
                 .foregroundStyle(.cardBorder)
+            Button {
+                showHelp = true
+            } label: {
+                Text("?")
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(.secondary)
+                    .frame(width: 24, height: 24)
+                    .overlay(
+                        Circle()
+                            .stroke(.cardBorder, lineWidth: 1)
+                    )
+            }
+            .buttonStyle(.plain)
         }
     }
 
@@ -163,6 +238,10 @@ struct ContentView: View {
                     .padding(.top, 8)
                 Spacer().frame(height: Theme.sectionGap)
                 setsSection
+                if connectionService.isConnected {
+                    Spacer().frame(height: Theme.sectionGap)
+                    shootAllSetsButton
+                }
             }
         }
     }
@@ -285,6 +364,50 @@ struct SetRulerView: View {
     }
 }
 
+// MARK: - Help View
+
+struct HelpView: View {
+    private let steps: [(String, String)] = [
+        ("Meter your shadows.", "Point your camera at the darkest area you want detail in and note the shutter speed. Set it under Shadows."),
+        ("Meter your highlights.", "Point at the brightest area and note that shutter speed. Set it under Highlights."),
+        ("Match your camera\u{2019}s AEB settings.", "Set AEB Frames and EV Spacing to match what your camera supports."),
+        ("Read the results.", "The calculator shows how many bracket sets you need and the center shutter speed for each set.")
+    ]
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    ForEach(Array(steps.enumerated()), id: \.offset) { index, step in
+                        HStack(alignment: .top, spacing: 14) {
+                            Text("\(index + 1)")
+                                .font(.caption2.weight(.semibold))
+                                .foregroundStyle(.accent)
+                                .frame(width: 24, height: 24)
+                                .background(
+                                    Circle()
+                                        .fill(.accent.opacity(0.1))
+                                )
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(step.0)
+                                    .font(.subheadline.weight(.semibold))
+                                Text(step.1)
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                    }
+                }
+                .padding()
+            }
+            .navigationTitle("How to Use")
+            .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+}
+
 #Preview {
     ContentView()
+        .environment(CameraConnectionService())
+        .environment(ShootingViewModel())
 }
