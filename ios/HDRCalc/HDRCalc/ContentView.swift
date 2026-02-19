@@ -25,12 +25,7 @@ struct ContentView: View {
     @State private var vm = CalculatorViewModel()
     @Environment(\.horizontalSizeClass) private var sizeClass
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Environment(CameraConnectionService.self) private var connectionService
-    @Environment(ShootingViewModel.self) private var shootingVM
     @State private var meterTarget: MeterTarget?
-    @State private var showConnectSheet = false
-    @State private var showConfirmSheet = false
-    @State private var showProgressCover = false
     @State private var showHelp = false
 
     private enum MeterTarget: Identifiable {
