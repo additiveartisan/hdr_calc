@@ -1,0 +1,9 @@
+Core Features - Camera Remote App
+
+1. Live View
+2. Remote shutter trigger
+3. Tap to Focus
+4. Exposure controls (aperture, shutter speed, ISO, exposure compensation)
+5. Self-timer with configurable delay
+6. Grid overlays
+7. Photo browsing and transfer
