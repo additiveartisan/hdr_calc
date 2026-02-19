@@ -53,28 +53,10 @@ struct ContentView: View {
         .sheet(item: $meterTarget) { target in
             MeterView(selectedIndex: target == .shadow ? $vm.shadowIndex : $vm.highlightIndex)
         }
-        .sheet(isPresented: $showConnectSheet) {
-            CameraConnectView()
-        }
-        .sheet(isPresented: $showConfirmSheet) {
-            ShootConfirmView(sets: vm.result.sets) {
-                showConfirmSheet = false
-                shootingVM.startShooting(sets: vm.result.sets)
-                showProgressCover = true
-            }
-        }
         .sheet(isPresented: $showHelp) {
             HelpView()
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.hidden)
-        }
-        .fullScreenCover(isPresented: $showProgressCover) {
-            ShootProgressView()
-        }
-        .onChange(of: shootingVM.phase) { _, newPhase in
-            if case .idle = newPhase {
-                showProgressCover = false
-            }
         }
         .tint(.accentColor)
         .animation(reduceMotion ? nil : .snappy(duration: 0.25), value: vm.shadowIndex)
