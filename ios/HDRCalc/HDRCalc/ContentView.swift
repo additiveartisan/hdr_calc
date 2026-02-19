@@ -348,6 +348,4 @@ struct HelpView: View {
 
 #Preview {
     ContentView()
-        .environment(CameraConnectionService())
-        .environment(ShootingViewModel())
 }
