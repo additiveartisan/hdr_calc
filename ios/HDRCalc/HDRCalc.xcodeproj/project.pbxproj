@@ -97,10 +97,6 @@
 				A10000020000000000000011 /* SpeedsTests.swift */,
 				A10000020000000000000012 /* CalculatorTests.swift */,
 				A10000020000000000000013 /* test_vectors.json */,
-				A10000020000000000000026 /* SonyCameraTypesTests.swift */,
-				A10000020000000000000027 /* CameraConnectionServiceTests.swift */,
-				A10000020000000000000028 /* ShootingViewModelTests.swift */,
-				A10000020000000000000031 /* ShutterSpeedMappingTests.swift */,
 			);
 			path = HDRCalcTests;
 			sourceTree = "<group>";
