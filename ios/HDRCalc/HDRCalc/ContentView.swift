@@ -31,6 +31,7 @@ struct ContentView: View {
     @State private var showConnectSheet = false
     @State private var showConfirmSheet = false
     @State private var showProgressCover = false
+    @State private var showHelp = false
 
     private enum MeterTarget: Identifiable {
         case shadow, highlight
@@ -66,6 +67,11 @@ struct ContentView: View {
                 shootingVM.startShooting(sets: vm.result.sets)
                 showProgressCover = true
             }
+        }
+        .sheet(isPresented: $showHelp) {
+            HelpView()
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.hidden)
         }
         .fullScreenCover(isPresented: $showProgressCover) {
             ShootProgressView()
@@ -138,6 +144,19 @@ struct ContentView: View {
             Rectangle()
                 .frame(height: 1)
                 .foregroundStyle(.cardBorder)
+            Button {
+                showHelp = true
+            } label: {
+                Text("?")
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(.secondary)
+                    .frame(width: 24, height: 24)
+                    .overlay(
+                        Circle()
+                            .stroke(.cardBorder, lineWidth: 1)
+                    )
+            }
+            .buttonStyle(.plain)
         }
     }
 
@@ -342,6 +361,48 @@ struct SetRulerView: View {
         }
         .frame(height: 48)
         .padding(.horizontal, 24)
+    }
+}
+
+// MARK: - Help View
+
+struct HelpView: View {
+    private let steps: [(String, String)] = [
+        ("Meter your shadows.", "Point your camera at the darkest area you want detail in and note the shutter speed. Set it under Shadows."),
+        ("Meter your highlights.", "Point at the brightest area and note that shutter speed. Set it under Highlights."),
+        ("Match your camera\u{2019}s AEB settings.", "Set AEB Frames and EV Spacing to match what your camera supports."),
+        ("Read the results.", "The calculator shows how many bracket sets you need and the center shutter speed for each set.")
+    ]
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    ForEach(Array(steps.enumerated()), id: \.offset) { index, step in
+                        HStack(alignment: .top, spacing: 14) {
+                            Text("\(index + 1)")
+                                .font(.caption2.weight(.semibold))
+                                .foregroundStyle(.accent)
+                                .frame(width: 24, height: 24)
+                                .background(
+                                    Circle()
+                                        .fill(.accent.opacity(0.1))
+                                )
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(step.0)
+                                    .font(.subheadline.weight(.semibold))
+                                Text(step.1)
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                    }
+                }
+                .padding()
+            }
+            .navigationTitle("How to Use")
+            .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }
 

@@ -33,12 +33,20 @@
 	function centerIndex(setLength: number): number {
 		return Math.floor(setLength / 2);
 	}
+
+	let showHelp = $state(false);
 </script>
+
+<svelte:window onkeydown={(e) => { if (e.key === 'Escape' && showHelp) { showHelp = false; (document.activeElement as HTMLElement)?.blur(); }}} />
 
 <main>
 	<div class="layout">
 		<div class="inputs">
-			<h1 class="title">HDR Calc</h1>
+			<h1 class="title">
+				HDR Calc
+				<span class="title-rule"></span>
+				<button class="help-btn" aria-label="How to use" onclick={() => showHelp = true}>?</button>
+			</h1>
 
 			<SpeedPicker
 				label="Shadows"
@@ -127,6 +135,25 @@
 	</footer>
 </main>
 
+{#if showHelp}
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions a11y_interactive_supports_focus -->
+<div class="overlay" role="dialog" aria-label="How to use HDR Calc" tabindex="-1" onclick={() => showHelp = false}>
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<div class="modal" onclick={(e) => e.stopPropagation()} onkeydown={() => {}}>
+		<div class="modal-header">
+			<span class="modal-title">How to Use</span>
+			<button class="modal-close" aria-label="Close" onclick={() => showHelp = false}>&times;</button>
+		</div>
+		<ol class="steps">
+			<li><strong>Meter your shadows.</strong> Point your camera at the darkest area you want detail in and note the shutter speed. Set it under Shadows.</li>
+			<li><strong>Meter your highlights.</strong> Point at the brightest area and note that shutter speed. Set it under Highlights.</li>
+			<li><strong>Match your camera's AEB settings.</strong> Set AEB Frames and EV Spacing to match what your camera supports.</li>
+			<li><strong>Read the results.</strong> The calculator shows how many bracket sets you need and the center shutter speed for each set.</li>
+		</ol>
+	</div>
+</div>
+{/if}
+
 <style>
 	main {
 		max-width: 960px;
@@ -157,11 +184,38 @@
 		gap: 16px;
 	}
 
-	.title::after {
-		content: '';
+	.title-rule {
 		flex: 1;
 		height: 1px;
 		background: var(--card-border);
+	}
+
+	.help-btn {
+		width: 24px;
+		height: 24px;
+		border-radius: 50%;
+		border: 1px solid var(--card-border);
+		background: transparent;
+		color: var(--text-muted);
+		font-family: inherit;
+		font-size: 13px;
+		font-weight: 500;
+		line-height: 1;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		transition: color 0.15s, border-color 0.15s;
+	}
+
+	.help-btn:hover {
+		color: var(--text);
+		border-color: var(--text-muted);
+	}
+
+	.help-btn:focus:not(:focus-visible) {
+		outline: none;
 	}
 
 	.range-stat {
@@ -320,6 +374,86 @@
 
 	footer a:hover {
 		color: var(--text);
+	}
+
+	.overlay {
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.5);
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		z-index: 100;
+		padding: 120px var(--page-padding) var(--page-padding);
+	}
+
+	.modal {
+		background: var(--bg);
+		border: 1px solid var(--card-border);
+		border-radius: var(--card-radius);
+		max-width: 420px;
+		width: 100%;
+		padding: 24px;
+	}
+
+	.modal-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 20px;
+	}
+
+	.modal-title {
+		font-weight: 600;
+		font-size: 17px;
+	}
+
+	.modal-close {
+		background: none;
+		border: none;
+		color: var(--text-muted);
+		font-size: 22px;
+		cursor: pointer;
+		line-height: 1;
+		padding: 0 4px;
+	}
+
+	.modal-close:hover {
+		color: var(--text);
+	}
+
+	.steps {
+		list-style: none;
+		counter-reset: step;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.steps li {
+		counter-increment: step;
+		font-size: 14px;
+		line-height: 1.5;
+		color: var(--text);
+		padding-left: 32px;
+		position: relative;
+	}
+
+	.steps li::before {
+		content: counter(step);
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 22px;
+		height: 22px;
+		border-radius: 50%;
+		background: var(--accent-soft);
+		color: var(--accent);
+		font-weight: 600;
+		font-size: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 </style>

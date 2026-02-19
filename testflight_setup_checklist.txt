@@ -1,0 +1,91 @@
+TestFlight Setup Checklist for HDR Calc
+========================================
+
+PREREQUISITES
+-------------
+[ ] Enroll in Apple Developer Program ($99/year)
+    - https://developer.apple.com/programs/enroll
+    - Sign in with Apple Account (two-factor auth required)
+    - Typically approved within 48 hours for individuals
+
+[ ] Complete Paid Apps Agreement in App Store Connect
+    - Go to appstoreconnect.apple.com > Agreements, Tax, and Banking
+    - Fill in bank account and tax info (required even for free apps)
+    - Without this you get BETA_CONTRACT_MISSING error
+
+APPLE DEVELOPER PORTAL
+-----------------------
+[ ] Register Bundle ID
+    - Go to developer.apple.com/account/resources/identifiers
+    - Click +, select App IDs > App
+    - Bundle ID: com.hdrcalc.app (must match Xcode project exactly)
+
+APP STORE CONNECT
+-----------------
+[ ] Create the app
+    - Apps > + > New App
+    - Platform: iOS
+    - Name: HDR Calc
+    - Bundle ID: select com.hdrcalc.app
+    - SKU: hdrcalc
+
+[ ] Fill in TestFlight test information
+    - Go to TestFlight tab
+    - Add beta app description and feedback email
+
+XCODE PROJECT CHANGES
+----------------------
+[ ] Configure signing
+    - Open ios/HDRCalc/HDRCalc.xcodeproj
+    - Select HDRCalc target > Signing & Capabilities
+    - Check "Automatically manage signing"
+    - Select your Developer team from dropdown
+
+[ ] Add export compliance key to Info.plist
+    - In target Info tab, add:
+      Key: ITSAppUsesNonExemptEncryption
+      Type: Boolean
+      Value: NO
+    - Prevents "Missing Compliance" blocker on every upload
+
+ARCHIVE AND UPLOAD
+------------------
+[ ] Archive the app
+    - Set destination to "Any iOS Device (arm64)"
+    - Product > Archive
+    - Wait for build to complete
+
+[ ] Upload to App Store Connect
+    - In Organizer, click Distribute App
+    - Choose App Store Connect > Upload
+    - Use automatic signing
+    - Upload (processing takes 5-15 minutes)
+
+SET UP TESTING
+--------------
+[ ] Create Internal Testing group (no Apple review needed)
+    - App Store Connect > TestFlight > + next to Internal Testing
+    - Name the group (e.g. "Dev Team")
+    - Add yourself as a tester
+    - Enable "Automatic distribution"
+    - Builds available within minutes
+
+[ ] (Optional) Create External Testing group
+    - For sharing with others, up to 10,000 testers
+    - Requires Beta App Review (24-48 hours for first build)
+    - Add testers by email or generate a public link
+
+INSTALL ON YOUR PHONE
+---------------------
+[ ] Install TestFlight app from the App Store
+[ ] Accept the invitation email
+[ ] Download HDR Calc from within TestFlight
+
+NOTES
+-----
+- TestFlight builds expire after 90 days
+- Increment build number for each upload (version can stay the same)
+- Internal testers: up to 100, no review needed
+- External testers: up to 10,000, first build per version needs review
+- Test in Release config locally before uploading (Product > Scheme >
+  Edit Scheme > Run > Build Configuration > Release)
