@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+
+# Xcode build artifacts
+ios/HDRCalc/build/
+ios/HDRCalc/build */
+*.xcuserdata
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+DerivedData/
+
+# Swift Package Manager
+.build/
+*.resolved
+
+# Web
+web/node_modules/
+web/build/
+web/.svelte-kit/
