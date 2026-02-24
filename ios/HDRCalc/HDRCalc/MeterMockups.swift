@@ -226,7 +226,8 @@ struct MockupMeterView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)
                     }
-                    .buttonStyle(.bordered)
+                    .buttonStyle(.borderedProminent)
+                    .tint(.accentColor.opacity(0.85))
                     .disabled(!hasSpeed)
                     .padding(.horizontal, 24)
                 }
