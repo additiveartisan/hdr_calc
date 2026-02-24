@@ -66,9 +66,25 @@ struct ContentView: View {
         VStack(alignment: .leading, spacing: 0) {
             titleRow
             Spacer().frame(height: Theme.sectionGap)
-            speedPicker(label: "Shadows", selection: $vm.shadowIndex, target: .shadow)
+            speedPicker(label: "Shadows", selection: $vm.shadowIndex)
             Spacer().frame(height: Theme.cardGap)
-            speedPicker(label: "Highlights", selection: $vm.highlightIndex, target: .highlight)
+            speedPicker(label: "Highlights", selection: $vm.highlightIndex)
+            Spacer().frame(height: Theme.sectionGap)
+
+            Button {
+                showMeter = true
+            } label: {
+                HStack {
+                    Image(systemName: "camera.metering.spot")
+                    Text("Meter Scene")
+                }
+                .font(.subheadline.weight(.medium))
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
+            }
+            .buttonStyle(.bordered)
+            .tint(.accentColor)
+
             Spacer().frame(height: Theme.sectionGap)
             segmentedSection(label: "AEB Frames", tag: $vm.frames, options: [(3, "3"), (5, "5"), (7, "7"), (9, "9")])
             Spacer().frame(height: Theme.cardGap)
