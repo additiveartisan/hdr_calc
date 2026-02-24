@@ -75,11 +75,11 @@ struct MockupTitleRow: View {
                     Button {} label: {
                         Image(systemName: "camera.metering.spot")
                             .font(.caption.weight(.medium))
-                            .foregroundStyle(.accentColor)
+                            .foregroundStyle(Color.accentColor)
                             .frame(width: 24, height: 24)
                             .overlay(
                                 Circle()
-                                    .stroke(.accentColor, lineWidth: 1)
+                                    .stroke(Color.accentColor, lineWidth: 1)
                             )
                     }
                     .buttonStyle(.plain)
