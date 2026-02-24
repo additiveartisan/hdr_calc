@@ -77,9 +77,9 @@ struct MockupTitleRow: View {
                             .font(.caption.weight(.medium))
                             .foregroundStyle(Color.accentColor)
                             .frame(width: 24, height: 24)
-                            .overlay(
+                            .background(
                                 Circle()
-                                    .stroke(Color.accentColor, lineWidth: 1)
+                                    .fill(Color.accentColor.opacity(0.15))
                             )
                     }
                     .buttonStyle(.plain)
