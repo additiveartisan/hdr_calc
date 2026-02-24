@@ -15,6 +15,7 @@
 		A10000010000000000000006 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000006 /* Theme.swift */; };
 		A10000010000000000000007 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000007 /* CameraService.swift */; };
 		A10000010000000000000008 /* MeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000008 /* MeterView.swift */; };
+		A10000010000000000000009 /* MeterMockups.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000009 /* MeterMockups.swift */; };
 		A10000010000000000000010 /* HDRCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000010 /* HDRCalcTests.swift */; };
 		A10000010000000000000011 /* SpeedsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000011 /* SpeedsTests.swift */; };
 		A10000010000000000000012 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000012 /* CalculatorTests.swift */; };
@@ -40,6 +41,7 @@
 		A10000020000000000000006 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		A10000020000000000000007 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		A10000020000000000000008 /* MeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterView.swift; sourceTree = "<group>"; };
+		A10000020000000000000009 /* MeterMockups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterMockups.swift; sourceTree = "<group>"; };
 		A10000020000000000000010 /* HDRCalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDRCalcTests.swift; sourceTree = "<group>"; };
 		A10000020000000000000011 /* SpeedsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedsTests.swift; sourceTree = "<group>"; };
 		A10000020000000000000012 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				A10000020000000000000006 /* Theme.swift */,
 				A10000020000000000000007 /* CameraService.swift */,
 				A10000020000000000000008 /* MeterView.swift */,
+				A10000020000000000000009 /* MeterMockups.swift */,
 				A10000020000000000000003 /* Assets.xcassets */,
 			);
 			path = HDRCalc;
@@ -217,6 +220,7 @@
 				A10000010000000000000006 /* Theme.swift in Sources */,
 				A10000010000000000000007 /* CameraService.swift in Sources */,
 				A10000010000000000000008 /* MeterView.swift in Sources */,
+				A10000010000000000000009 /* MeterMockups.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
