@@ -7,7 +7,7 @@ final class CalculatorViewModel {
     var shadowIndex: Int = labelToIndex("1/4")
     var highlightIndex: Int = labelToIndex("1/1000")
     var frames: Int = 5
-    var spacing: Double = 1.0
+    var spacing: Double = 2.0
 
     var result: CalculationResult {
         calculate(
