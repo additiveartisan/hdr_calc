@@ -218,12 +218,15 @@ struct MockupMeterView: View {
                     }
 
                     Button {} label: {
-                        Text(buttonLabel)
-                            .font(.subheadline.weight(.medium))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 12)
+                        HStack {
+                            Image(systemName: "camera.metering.spot")
+                            Text(buttonLabel)
+                        }
+                        .font(.subheadline.weight(.medium))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
                     }
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(.bordered)
                     .disabled(!hasSpeed)
                     .padding(.horizontal, 24)
                 }
