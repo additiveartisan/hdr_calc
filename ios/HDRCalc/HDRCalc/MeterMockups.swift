@@ -81,6 +81,10 @@ struct MockupTitleRow: View {
                                 Circle()
                                     .fill(Color.accentColor.opacity(0.15))
                             )
+                            .overlay(
+                                Circle()
+                                    .stroke(.cardBorder, lineWidth: 1)
+                            )
                     }
                     .buttonStyle(.plain)
                     Button {} label: {
