@@ -1,12 +1,39 @@
 import SwiftUI
 import AVFoundation
 
+enum MeterPhase {
+    case shadow, highlight
+}
+
 struct MeterView: View {
-    @Binding var selectedIndex: Int
+    @Binding var shadowIndex: Int
+    @Binding var highlightIndex: Int
     @Environment(\.dismiss) private var dismiss
+    @State private var phase: MeterPhase = .shadow
     @State private var camera = CameraService()
     @State private var reticlePosition: CGPoint?
     @State private var reticleVisible = false
+
+    private var navTitle: String {
+        switch phase {
+        case .shadow:    return "Step 1 of 2: Meter Shadows"
+        case .highlight: return "Step 2 of 2: Meter Highlights"
+        }
+    }
+
+    private var instruction: String {
+        switch phase {
+        case .shadow:    return "Tap the darkest area"
+        case .highlight: return "Tap the brightest area"
+        }
+    }
+
+    private var confirmLabel: String {
+        switch phase {
+        case .shadow:    return "Use for Shadows"
+        case .highlight: return "Use for Highlights"
+        }
+    }
 
     var body: some View {
         NavigationStack {
@@ -19,11 +46,19 @@ struct MeterView: View {
                     ProgressView()
                 }
             }
-            .navigationTitle("Meter Exposure")
+            .navigationTitle(navTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button { dismiss() } label: {
+                    Button {
+                        switch phase {
+                        case .shadow:
+                            dismiss()
+                        case .highlight:
+                            camera.meteredSpeed = nil
+                            phase = .shadow
+                        }
+                    } label: {
                         Image(systemName: "chevron.left")
                     }
                 }
@@ -64,6 +99,12 @@ struct MeterView: View {
             }
 
             VStack(spacing: 12) {
+                Text(instruction)
+                    .font(.caption.weight(.medium))
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 6)
+                    .background(.ultraThinMaterial, in: Capsule())
+
                 if let speed = camera.meteredSpeed {
                     Text(speed.label)
                         .font(.title2.weight(.semibold).monospacedDigit())
@@ -71,22 +112,37 @@ struct MeterView: View {
                         .padding(.vertical, 10)
                         .background(.ultraThinMaterial, in: Capsule())
                 }
+
                 Button {
-                    if let speed = camera.meteredSpeed {
-                        selectedIndex = speed.index
-                    }
-                    dismiss()
+                    confirmAction()
                 } label: {
-                    Text("Use This Speed")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
+                    HStack {
+                        Image(systemName: "camera.metering.spot")
+                        Text(confirmLabel)
+                    }
+                    .font(.subheadline.weight(.medium))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(.bordered)
+                .tint(.accentColor)
                 .disabled(camera.meteredSpeed == nil)
                 .padding(.horizontal, 24)
             }
             .padding(.bottom, 24)
+        }
+    }
+
+    private func confirmAction() {
+        guard let speed = camera.meteredSpeed else { return }
+        switch phase {
+        case .shadow:
+            shadowIndex = speed.index
+            camera.meteredSpeed = nil
+            phase = .highlight
+        case .highlight:
+            highlightIndex = speed.index
+            dismiss()
         }
     }
 
