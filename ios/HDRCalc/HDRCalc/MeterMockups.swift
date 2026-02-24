@@ -74,9 +74,13 @@ struct MockupTitleRow: View {
                         .foregroundStyle(.cardBorder)
                     Button {} label: {
                         Image(systemName: "camera.metering.spot")
-                            .font(.subheadline)
+                            .font(.caption.weight(.medium))
                             .foregroundStyle(.secondary)
                             .frame(width: 24, height: 24)
+                            .overlay(
+                                Circle()
+                                    .stroke(.cardBorder, lineWidth: 1)
+                            )
                     }
                     .buttonStyle(.plain)
                     Button {} label: {
