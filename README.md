@@ -15,17 +15,17 @@
 </p>
 
 <p align="center">
-  <img src="ios/screenshot_main.png" width="180" alt="Set your speeds">&ensp;
-  <img src="ios/screenshot_brackets.png" width="180" alt="See your bracket sets">&ensp;
-  <img src="ios/screenshot_shooting.png" width="180" alt="Shooting in progress">&ensp;
-  <img src="ios/screenshot_complete.png" width="180" alt="All frames captured">
+  <img src="ios/screenshot_dark.png" width="180" alt="Dark mode with bracket sets">&ensp;
+  <img src="ios/screenshot_brackets.png" width="180" alt="Three bracket sets with tick-mark rulers">&ensp;
+  <img src="ios/screenshot_meter.png" width="180" alt="Camera metering: tap the darkest area">&ensp;
+  <img src="ios/screenshot_light.png" width="180" alt="Light mode">
 </p>
 
 Set your shadow and highlight speeds, pick your AEB frame count and EV spacing, and the app instantly shows every bracket set you need to capture. Built for real estate, architecture, landscape, and interior photography.
 
 > **1/3-stop scale** from 1/8000s to 30s&ensp;&ensp;·&ensp;&ensp;**3, 5, 7, or 9** AEB frames&ensp;&ensp;·&ensp;&ensp;**1 / 1.5 / 2** EV spacing
 >
-> **Tap-to-meter** from the camera sensor&ensp;&ensp;·&ensp;&ensp;**Sony remote control** over Wi-Fi
+> **Two-phase camera metering**: tap shadows, then highlights, in a single session
 >
 > **Web** (offline PWA)&ensp;&ensp;+&ensp;&ensp;**iOS** (SwiftUI)
 
@@ -86,9 +86,7 @@ Native SwiftUI app targeting iOS 17+. Single-screen layout on iPhone, two-column
 
 **Bracketing** &ensp; Wheel pickers for the full 55-value shutter speed scale. Tick-mark ruler visualization for each set.
 
-**Camera metering** &ensp; Tap the meter button to open a live camera view. Point at the scene, tap to set the metering point, and the app reads the exposure directly from the sensor, mapped to the nearest 1/3-stop.
-
-**Sony camera control** &ensp; Connect to a supported Sony camera over Wi-Fi. The app sets each shutter speed, verifies the setting, and fires the shutter automatically for every frame in your bracket sets. A progress ring tracks completed frames. If verification fails after retries, the loop stops and reports partial progress so you can reconnect and continue.
+**Camera metering** &ensp; Tap "Meter Scene" to open a two-phase camera flow. In step 1, point at the darkest area and tap to meter shadows. Confirm, and the app advances to step 2 for highlights. The camera stays live throughout both phases, reading exposure directly from the sensor and mapping it to the nearest 1/3-stop. One session, two readings, no friction.
 
 **Accessibility** &ensp; VoiceOver, Dynamic Type, and Reduced Motion support. Adaptive light and dark appearance.
 
