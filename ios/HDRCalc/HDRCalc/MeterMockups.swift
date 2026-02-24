@@ -110,16 +110,35 @@ struct MockupTitleRow: View {
 
                 Spacer().frame(height: Theme.sectionGap)
 
-                // Annotation
-                HStack(spacing: 8) {
-                    Image(systemName: "arrow.up")
-                        .font(.caption)
-                    Text("Single camera button in title bar opens two-step metering flow")
-                        .font(.caption)
+                // Sony branch buttons for comparison
+                Text("COMPARISON (sony branch buttons)")
+                    .font(.caption2.weight(.medium))
+                    .foregroundStyle(.secondary)
+
+                Button {} label: {
+                    HStack {
+                        Image(systemName: "wifi.slash")
+                        Text("Connect Camera")
+                    }
+                    .font(.subheadline.weight(.medium))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
                 }
-                .foregroundStyle(.secondary)
-                .padding(12)
-                .background(RoundedRectangle(cornerRadius: 8).fill(.cardBackground))
+                .buttonStyle(.bordered)
+                .tint(.accentColor)
+
+                Spacer().frame(height: Theme.cardGap)
+
+                Button {} label: {
+                    HStack {
+                        Image(systemName: "camera.shutter.button")
+                        Text("Shoot All Sets")
+                    }
+                    .font(.subheadline.weight(.medium))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                }
+                .buttonStyle(.bordered)
             }
             .padding(Theme.pagePadding)
         }
