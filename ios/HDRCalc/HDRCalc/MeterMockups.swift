@@ -219,11 +219,11 @@ struct MockupMeterView: View {
 
                     Button {} label: {
                         Text(buttonLabel)
-                            .font(.headline)
+                            .font(.subheadline.weight(.medium))
                             .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
+                            .padding(.vertical, 12)
                     }
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(.bordered)
                     .disabled(!hasSpeed)
                     .padding(.horizontal, 24)
                 }
