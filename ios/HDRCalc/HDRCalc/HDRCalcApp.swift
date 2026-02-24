@@ -4,7 +4,7 @@ import SwiftUI
 struct HDRCalcApp: App {
     var body: some Scene {
         WindowGroup {
-            MockupRunner() // TODO: revert to ContentView()
+            ContentView()
         }
     }
 }
