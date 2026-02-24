@@ -98,7 +98,7 @@ struct MockupTitleRow: View {
                 // Meter button - orange pill
                 Button {} label: {
                     HStack {
-                        Image(systemName: "camera.metering.spot.circle")
+                        Image(systemName: "camera.metering.spot")
                         Text("Meter Scene")
                     }
                     .font(.subheadline.weight(.medium))
