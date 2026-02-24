@@ -65,28 +65,13 @@ struct MockupTitleRow: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                // Title row with single camera button
+                // Title row (no camera button here)
                 HStack(spacing: 16) {
                     Text("HDR Calc")
                         .font(.title3.weight(.semibold))
                     Rectangle()
                         .frame(height: 1)
                         .foregroundStyle(.cardBorder)
-                    Button {} label: {
-                        Image(systemName: "camera.metering.spot")
-                            .font(.caption.weight(.medium))
-                            .foregroundStyle(Color.accentColor)
-                            .frame(width: 24, height: 24)
-                            .background(
-                                Circle()
-                                    .fill(Color.accentColor.opacity(0.15))
-                            )
-                            .overlay(
-                                Circle()
-                                    .stroke(.cardBorder, lineWidth: 1)
-                            )
-                    }
-                    .buttonStyle(.plain)
                     Button {} label: {
                         Text("?")
                             .font(.caption.weight(.medium))
@@ -102,13 +87,26 @@ struct MockupTitleRow: View {
 
                 Spacer().frame(height: Theme.sectionGap)
 
-                // Shadows picker - no camera button
                 pickerSection(label: "Shadows", value: "1/4")
 
                 Spacer().frame(height: Theme.cardGap)
 
-                // Highlights picker - no camera button
                 pickerSection(label: "Highlights", value: "1/1000")
+
+                Spacer().frame(height: Theme.sectionGap)
+
+                // Meter button - orange pill
+                Button {} label: {
+                    HStack {
+                        Image(systemName: "camera.metering.spot")
+                        Text("Meter Scene")
+                    }
+                    .font(.subheadline.weight(.medium))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                }
+                .buttonStyle(.bordered)
+                .tint(.accentColor)
 
                 Spacer().frame(height: Theme.sectionGap)
 
