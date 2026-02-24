@@ -45,8 +45,8 @@ struct ContentView: View {
                 .padding(Theme.pagePadding)
             }
         }
-        .sheet(item: $meterTarget) { target in
-            MeterView(selectedIndex: target == .shadow ? $vm.shadowIndex : $vm.highlightIndex)
+        .sheet(isPresented: $showMeter) {
+            MeterView(shadowIndex: $vm.shadowIndex, highlightIndex: $vm.highlightIndex)
         }
         .sheet(isPresented: $showHelp) {
             HelpView()
