@@ -2,11 +2,9 @@
   "hooks": {},
   "permissions": {
     "allow": [
-      "AskUserQuestion",
       "Bash",
       "Edit(//Users/rob/**)",
       "Execute(//Users/rob/**)",
-      "ExitPlanMode",
       "Glob(*)",
       "Grep(*)",
       "Read",
