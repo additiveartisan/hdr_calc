@@ -108,8 +108,7 @@
       "Skill(pdf)",
       "Skill(pptx)",
       "Skill(docx)"
-    ],
-    "defaultMode": "plan"
+    ]
   },
   "statusLine": {
     "type": "command",
