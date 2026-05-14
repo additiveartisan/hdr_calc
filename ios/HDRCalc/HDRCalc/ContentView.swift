@@ -163,8 +163,9 @@ struct ContentView: View {
     // MARK: - Results
 
     private var resultsSection: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            evRangeRow
+        let result = vm.result
+        return VStack(alignment: .leading, spacing: 0) {
+            evRangeRow(result: result)
             Spacer().frame(height: Theme.sectionGap)
 
             Text("Scene Dynamic Range")
@@ -173,23 +174,23 @@ struct ContentView: View {
                 .tracking(0.5)
                 .foregroundStyle(.secondary)
 
-            if vm.result.rangeEv == 0 {
+            if result.rangeEv == 0 {
                 Text("Single exposure needed. No bracketing required.")
                     .foregroundStyle(.secondary)
                     .font(.subheadline)
                     .padding(.top, 16)
             } else {
-                summaryRow
+                summaryRow(result: result)
                     .padding(.top, 8)
                 Spacer().frame(height: Theme.sectionGap)
-                setsSection
+                setsSection(result: result)
             }
         }
     }
 
-    private var evRangeRow: some View {
+    private func evRangeRow(result: CalculationResult) -> some View {
         HStack(spacing: 6) {
-            Text(formatEV(vm.result.rangeEv))
+            Text(formatEV(result.rangeEv))
                 .font(.title3.weight(.semibold))
             Text("EV")
                 .font(.title3.weight(.semibold))
@@ -199,22 +200,22 @@ struct ContentView: View {
         }
     }
 
-    private var summaryRow: some View {
+    private func summaryRow(result: CalculationResult) -> some View {
         HStack(spacing: 8) {
-            Text("\(vm.result.sets.count) set\(vm.result.sets.count > 1 ? "s" : "")")
+            Text("\(result.sets.count) set\(result.sets.count > 1 ? "s" : "")")
                 .foregroundStyle(.secondary)
                 .font(.subheadline)
             Text("\u{00B7}")
                 .foregroundStyle(.secondary.opacity(0.4))
-            Text("\(vm.result.totalExposures) exposures")
+            Text("\(result.totalExposures) exposures")
                 .foregroundStyle(.secondary)
                 .font(.subheadline)
         }
     }
 
-    private var setsSection: some View {
+    private func setsSection(result: CalculationResult) -> some View {
         VStack(spacing: 16) {
-            ForEach(Array(vm.result.sets.enumerated()), id: \.offset) { index, set in
+            ForEach(Array(result.sets.enumerated()), id: \.offset) { index, set in
                 SetGroupView(setNumber: index + 1, speeds: set, colorIndex: index)
             }
         }

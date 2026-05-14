@@ -3,6 +3,27 @@ import AVFoundation
 
 enum MeterPhase {
     case shadow, highlight
+
+    var navTitle: String {
+        switch self {
+        case .shadow:    return "Step 1 of 2: Meter Shadows"
+        case .highlight: return "Step 2 of 2: Meter Highlights"
+        }
+    }
+
+    var instruction: String {
+        switch self {
+        case .shadow:    return "Tap the darkest area"
+        case .highlight: return "Tap the brightest area"
+        }
+    }
+
+    var confirmLabel: String {
+        switch self {
+        case .shadow:    return "Use for Shadows"
+        case .highlight: return "Use for Highlights"
+        }
+    }
 }
 
 struct MeterView: View {
@@ -12,41 +33,21 @@ struct MeterView: View {
     @State private var phase: MeterPhase = .shadow
     @State private var camera = CameraService()
     @State private var reticlePosition: CGPoint?
-    @State private var reticleVisible = false
-
-    private var navTitle: String {
-        switch phase {
-        case .shadow:    return "Step 1 of 2: Meter Shadows"
-        case .highlight: return "Step 2 of 2: Meter Highlights"
-        }
-    }
-
-    private var instruction: String {
-        switch phase {
-        case .shadow:    return "Tap the darkest area"
-        case .highlight: return "Tap the brightest area"
-        }
-    }
-
-    private var confirmLabel: String {
-        switch phase {
-        case .shadow:    return "Use for Shadows"
-        case .highlight: return "Use for Highlights"
-        }
-    }
+    @State private var reticleTapId = UUID()
 
     var body: some View {
         NavigationStack {
             ZStack {
-                if camera.authorizationDenied {
+                switch camera.authState {
+                case .denied:
                     deniedView
-                } else if camera.isAuthorized {
+                case .authorized:
                     cameraPreview
-                } else {
+                case .unknown:
                     ProgressView()
                 }
             }
-            .navigationTitle(navTitle)
+            .navigationTitle(phase.navTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -55,7 +56,7 @@ struct MeterView: View {
                         case .shadow:
                             dismiss()
                         case .highlight:
-                            camera.meteredSpeed = nil
+                            camera.clearReading()
                             phase = .shadow
                         }
                     } label: {
@@ -93,13 +94,14 @@ struct MeterView: View {
                     handleTap(location)
                 }
 
-            if reticleVisible, let pos = reticlePosition {
+            if let pos = reticlePosition {
                 ReticleView()
                     .position(pos)
+                    .id(reticleTapId)
             }
 
             VStack(spacing: 12) {
-                Text(instruction)
+                Text(phase.instruction)
                     .font(.caption.weight(.medium))
                     .padding(.horizontal, 14)
                     .padding(.vertical, 6)
@@ -118,7 +120,7 @@ struct MeterView: View {
                 } label: {
                     HStack {
                         Image(systemName: "camera.metering.spot")
-                        Text(confirmLabel)
+                        Text(phase.confirmLabel)
                     }
                     .font(.subheadline.weight(.medium))
                     .frame(maxWidth: .infinity)
@@ -138,7 +140,7 @@ struct MeterView: View {
         switch phase {
         case .shadow:
             shadowIndex = speed.index
-            camera.meteredSpeed = nil
+            camera.clearReading()
             phase = .highlight
         case .highlight:
             highlightIndex = speed.index
@@ -147,17 +149,17 @@ struct MeterView: View {
     }
 
     private func handleTap(_ location: CGPoint) {
-        let screenSize = UIScreen.main.bounds.size
-        let normalized = CGPoint(
-            x: location.x / screenSize.width,
-            y: location.y / screenSize.height
-        )
-        camera.setExposurePoint(normalized)
+        camera.setExposurePoint(layerPoint: location)
 
+        let id = UUID()
+        reticleTapId = id
         reticlePosition = location
-        reticleVisible = true
-        withAnimation(.easeOut(duration: 0.6)) {
-            reticleVisible = false
+
+        Task {
+            try? await Task.sleep(for: .milliseconds(900))
+            if reticleTapId == id {
+                reticlePosition = nil
+            }
         }
     }
 }

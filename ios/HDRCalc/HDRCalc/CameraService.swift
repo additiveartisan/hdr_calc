@@ -1,20 +1,28 @@
 import AVFoundation
 
+enum CameraAuthState {
+    case unknown
+    case authorized
+    case denied
+}
+
 @Observable
 final class CameraService: NSObject {
-    var meteredSpeed: ShutterSpeed?
-    var isAuthorized = false
-    var authorizationDenied = false
+    private(set) var meteredSpeed: ShutterSpeed?
+    private(set) var authState: CameraAuthState = .unknown
 
-    private var session: AVCaptureSession?
-    private var device: AVCaptureDevice?
-    private var observation: NSKeyValueObservation?
-    private var lastUpdate = Date.distantPast
+    @ObservationIgnored private var session: AVCaptureSession?
+    @ObservationIgnored private var device: AVCaptureDevice?
+    @ObservationIgnored private var observation: NSKeyValueObservation?
+    @ObservationIgnored private var lastUpdate = Date.distantPast
+    @ObservationIgnored private var cachedPreviewLayer: AVCaptureVideoPreviewLayer?
 
     var previewLayer: AVCaptureVideoPreviewLayer? {
+        if let cachedPreviewLayer { return cachedPreviewLayer }
         guard let session else { return nil }
         let layer = AVCaptureVideoPreviewLayer(session: session)
         layer.videoGravity = .resizeAspectFill
+        cachedPreviewLayer = layer
         return layer
     }
 
@@ -25,18 +33,17 @@ final class CameraService: NSObject {
     func requestAccess() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            isAuthorized = true
+            authState = .authorized
             startSession()
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
                 DispatchQueue.main.async {
-                    self?.isAuthorized = granted
-                    self?.authorizationDenied = !granted
+                    self?.authState = granted ? .authorized : .denied
                     if granted { self?.startSession() }
                 }
             }
         default:
-            authorizationDenied = true
+            authState = .denied
         }
     }
 
@@ -55,15 +62,17 @@ final class CameraService: NSObject {
         session = captureSession
 
         observation = camera.observe(\.exposureDuration, options: [.new]) { [weak self] cam, _ in
-            guard let self else { return }
-            let now = Date()
-            guard now.timeIntervalSince(self.lastUpdate) > 0.15 else { return }
-            self.lastUpdate = now
             let seconds = CMTimeGetSeconds(cam.exposureDuration)
             guard seconds > 0, seconds.isFinite else { return }
-            let speed = nearestSpeed(seconds: seconds)
             DispatchQueue.main.async {
-                self.meteredSpeed = speed
+                guard let self else { return }
+                let now = Date()
+                guard now.timeIntervalSince(self.lastUpdate) > 0.15 else { return }
+                self.lastUpdate = now
+                let speed = nearestSpeed(seconds: seconds)
+                if speed.index != self.meteredSpeed?.index {
+                    self.meteredSpeed = speed
+                }
             }
         }
 
@@ -78,15 +87,24 @@ final class CameraService: NSObject {
         session?.stopRunning()
         session = nil
         device = nil
+        cachedPreviewLayer = nil
     }
 
-    func setExposurePoint(_ point: CGPoint) {
-        guard let device, device.isExposurePointOfInterestSupported else { return }
+    func clearReading() {
+        meteredSpeed = nil
+    }
+
+    func setExposurePoint(layerPoint: CGPoint) {
+        guard let device, device.isExposurePointOfInterestSupported,
+              let layer = previewLayer else { return }
+        let devicePoint = layer.captureDevicePointConverted(fromLayerPoint: layerPoint)
         do {
             try device.lockForConfiguration()
-            device.exposurePointOfInterest = point
+            device.exposurePointOfInterest = devicePoint
             device.exposureMode = .autoExpose
             device.unlockForConfiguration()
-        } catch {}
+        } catch {
+            assertionFailure("lockForConfiguration failed: \(error)")
+        }
     }
 }

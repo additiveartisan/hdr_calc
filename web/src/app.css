@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap');
+@font-face {
+	font-family: 'Outfit';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('/fonts/outfit.woff2') format('woff2');
+}
 
 :root {
 	--bg: #ffffff;
@@ -58,6 +64,18 @@ body {
 	color: var(--text);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+main {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: var(--page-padding);
+	min-height: 100dvh;
+}
+
+.title {
+	font-weight: 600;
+	font-size: 20px;
 }
 
 .label {

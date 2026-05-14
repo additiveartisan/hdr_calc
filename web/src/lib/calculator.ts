@@ -32,21 +32,15 @@ export function calculate(
 	}
 
 	const step = spacing * 3;
-	const coverage = (frames - 1) * spacing;
 	const sets: Speed[][] = [];
 	let setStart = bright;
 
-	if (rangeEv <= coverage) {
+	while (true) {
 		const indices = buildSet(setStart, frames, step);
 		sets.push(indices.map((i) => SPEEDS[i]));
-	} else {
-		for (let safety = 0; safety < 50; safety++) {
-			const indices = buildSet(setStart, frames, step);
-			sets.push(indices.map((i) => SPEEDS[i]));
-			const lastFrame = indices[indices.length - 1];
-			if (lastFrame > dark) break;
-			setStart = lastFrame;
-		}
+		const lastFrame = indices[indices.length - 1];
+		if (lastFrame > dark || lastFrame === setStart) break;
+		setStart = lastFrame;
 	}
 
 	return {

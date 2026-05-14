@@ -33,7 +33,10 @@ self.addEventListener('fetch', (event: FetchEvent) => {
 
 	event.respondWith(
 		caches.match(event.request).then((cached) => {
-			return cached || fetch(event.request);
+			if (cached) return cached;
+			return fetch(event.request).catch(
+				() => new Response('', { status: 504, statusText: 'Offline' })
+			);
 		})
 	);
 });

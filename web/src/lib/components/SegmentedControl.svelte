@@ -10,14 +10,13 @@
 
 	let selectedIdx = $derived(options.findIndex((o) => o.value === value));
 	let containerEl: HTMLDivElement | undefined = $state();
+	let buttonEls: HTMLButtonElement[] = $state([]);
 	let pillLeft = $state(0);
 	let pillWidth = $state(0);
 	let moving = $state(false);
 
 	$effect(() => {
-		if (!containerEl || selectedIdx < 0) return;
-		const buttons = containerEl.querySelectorAll('button');
-		const btn = buttons[selectedIdx] as HTMLElement | undefined;
+		const btn = buttonEls[selectedIdx];
 		if (!btn) return;
 		const newLeft = btn.offsetLeft;
 		if (pillLeft !== 0 && newLeft !== pillLeft) {
@@ -28,14 +27,13 @@
 	});
 
 	function handleKeydown(e: KeyboardEvent) {
-		const idx = options.findIndex((o) => o.value === value);
 		if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
 			e.preventDefault();
-			const next = Math.min(idx + 1, options.length - 1);
+			const next = Math.min(selectedIdx + 1, options.length - 1);
 			onchange(options[next].value);
 		} else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
 			e.preventDefault();
-			const prev = Math.max(idx - 1, 0);
+			const prev = Math.max(selectedIdx - 1, 0);
 			onchange(options[prev].value);
 		}
 	}
@@ -56,12 +54,13 @@
 		style:width="{pillWidth}px"
 		ontransitionend={(e) => { if (e.propertyName === 'left') moving = false; }}
 	></div>
-	{#each options as opt}
+	{#each options as opt, i}
 		<button
 			type="button"
 			role="radio"
 			aria-checked={opt.value === value}
 			class:selected={opt.value === value}
+			bind:this={buttonEls[i]}
 			onclick={() => onchange(opt.value)}
 		>
 			{opt.label}

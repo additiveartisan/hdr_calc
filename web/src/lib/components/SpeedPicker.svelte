@@ -69,13 +69,17 @@
 	}
 
 	function handleClickOutside(e: MouseEvent) {
-		if (open && triggerEl && !triggerEl.closest('.picker')?.contains(e.target as Node)) {
+		if (triggerEl && !triggerEl.closest('.picker')?.contains(e.target as Node)) {
 			open = false;
 		}
 	}
-</script>
 
-<svelte:window onclick={handleClickOutside} />
+	$effect(() => {
+		if (!open) return;
+		window.addEventListener('click', handleClickOutside);
+		return () => window.removeEventListener('click', handleClickOutside);
+	});
+</script>
 
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div class="picker" role="group" onkeydown={handleKeydown}>
@@ -120,15 +124,6 @@
 <style>
 	.picker {
 		position: relative;
-	}
-
-	.label {
-		font-weight: 500;
-		font-size: 13px;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		color: var(--text-muted);
-		margin-bottom: 8px;
 	}
 
 	.trigger {

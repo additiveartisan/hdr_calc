@@ -15,7 +15,6 @@
 		A10000010000000000000006 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000006 /* Theme.swift */; };
 		A10000010000000000000007 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000007 /* CameraService.swift */; };
 		A10000010000000000000008 /* MeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000008 /* MeterView.swift */; };
-		A10000010000000000000010 /* HDRCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000010 /* HDRCalcTests.swift */; };
 		A10000010000000000000011 /* SpeedsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000011 /* SpeedsTests.swift */; };
 		A10000010000000000000012 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000012 /* CalculatorTests.swift */; };
 		A10000010000000000000013 /* test_vectors.json in Resources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000013 /* test_vectors.json */; };
@@ -40,7 +39,6 @@
 		A10000020000000000000006 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		A10000020000000000000007 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		A10000020000000000000008 /* MeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterView.swift; sourceTree = "<group>"; };
-		A10000020000000000000010 /* HDRCalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDRCalcTests.swift; sourceTree = "<group>"; };
 		A10000020000000000000011 /* SpeedsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedsTests.swift; sourceTree = "<group>"; };
 		A10000020000000000000012 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		A10000020000000000000013 /* test_vectors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test_vectors.json; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 		A10000080000000000000003 /* HDRCalcTests */ = {
 			isa = PBXGroup;
 			children = (
-				A10000020000000000000010 /* HDRCalcTests.swift */,
 				A10000020000000000000011 /* SpeedsTests.swift */,
 				A10000020000000000000012 /* CalculatorTests.swift */,
 				A10000020000000000000013 /* test_vectors.json */,
@@ -224,7 +221,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A10000010000000000000010 /* HDRCalcTests.swift in Sources */,
 				A10000010000000000000011 /* SpeedsTests.swift in Sources */,
 				A10000010000000000000012 /* CalculatorTests.swift in Sources */,
 			);

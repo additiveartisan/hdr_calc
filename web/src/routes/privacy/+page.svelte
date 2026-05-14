@@ -29,20 +29,12 @@
 <style>
 	main {
 		max-width: 640px;
-		margin: 0 auto;
-		padding: var(--page-padding);
-		min-height: 100dvh;
 	}
 
 	.content {
 		display: flex;
 		flex-direction: column;
 		gap: 16px;
-	}
-
-	.title {
-		font-weight: 600;
-		font-size: 20px;
 	}
 
 	.updated {

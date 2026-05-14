@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { calculate } from '$lib/calculator';
-	import { SPEEDS, labelToIndex } from '$lib/speeds';
+	import { labelToIndex } from '$lib/speeds';
 	import SpeedPicker from '$lib/components/SpeedPicker.svelte';
 	import SegmentedControl from '$lib/components/SegmentedControl.svelte';
 
@@ -30,31 +30,35 @@
 		return i % 2 === 0 ? 'var(--bracket-1)' : 'var(--bracket-2)';
 	}
 
-	function centerIndex(setLength: number): number {
-		return Math.floor(setLength / 2);
+	let helpDialog: HTMLDialogElement | undefined = $state();
+
+	function openHelp() {
+		helpDialog?.showModal();
 	}
 
-	let showHelp = $state(false);
-</script>
+	function closeHelp() {
+		helpDialog?.close();
+	}
 
-<svelte:window onkeydown={(e) => { if (e.key === 'Escape' && showHelp) { showHelp = false; (document.activeElement as HTMLElement)?.blur(); }}} />
+	function onDialogClick(e: MouseEvent) {
+		if (e.target === helpDialog) closeHelp();
+	}
+</script>
 
 <main>
 	<div class="layout">
-		<div class="inputs">
-			<h1 class="title">
-				HDR Calc
-				<span class="title-rule"></span>
-				<button class="help-btn" aria-label="How to use" onclick={() => showHelp = true}>?</button>
-			</h1>
+		<div class="header">
+			<h1 class="title">HDR Calc</h1>
+			<span class="title-rule"></span>
+			<button class="help-btn" aria-label="How to use" onclick={openHelp}>?</button>
+		</div>
 
+		<div class="inputs">
 			<SpeedPicker
 				label="Shadows"
 				value={shadowIndex}
 				onchange={(v) => (shadowIndex = v)}
 			/>
-
-			<div style="height: var(--card-gap)"></div>
 
 			<SpeedPicker
 				label="Highlights"
@@ -62,25 +66,25 @@
 				onchange={(v) => (highlightIndex = v)}
 			/>
 
-			<div style="height: var(--section-gap)"></div>
+			<div class="group">
+				<div class="label">AEB Frames</div>
+				<SegmentedControl
+					options={frameOptions}
+					value={frames}
+					ariaLabel="Frames per AEB set"
+					onchange={(v) => (frames = v)}
+				/>
+			</div>
 
-			<div class="label">AEB Frames</div>
-			<SegmentedControl
-				options={frameOptions}
-				value={frames}
-				ariaLabel="Frames per AEB set"
-				onchange={(v) => (frames = v)}
-			/>
-
-			<div style="height: var(--card-gap)"></div>
-
-			<div class="label">EV Spacing</div>
-			<SegmentedControl
-				options={spacingOptions}
-				value={spacing}
-				ariaLabel="EV spacing between frames"
-				onchange={(v) => (spacing = v)}
-			/>
+			<div class="group">
+				<div class="label">EV Spacing</div>
+				<SegmentedControl
+					options={spacingOptions}
+					value={spacing}
+					ariaLabel="EV spacing between frames"
+					onchange={(v) => (spacing = v)}
+				/>
+			</div>
 		</div>
 
 		<div class="results">
@@ -99,31 +103,31 @@
 					<span class="summary-item">{result.totalExposures} exposures</span>
 				</div>
 
-				<div style="height: var(--section-gap)"></div>
-
-				{#each result.sets as set, i}
-					<div
-						class="set-group"
-						role="group"
-						aria-label="Set {i + 1}"
-					>
-						<div class="set-header">
-							<span class="set-dot" style:background={setColor(i)}></span>
-							Set {i + 1}
+				<div class="sets">
+					{#each result.sets as set, i}
+						<div
+							class="set-group"
+							role="group"
+							aria-label="Set {i + 1}"
+						>
+							<div class="set-header">
+								<span class="set-dot" style:background={setColor(i)}></span>
+								Set {i + 1}
+							</div>
+							<div class="speed-ruler">
+								<div class="ruler-track" style:background={setColor(i)}></div>
+								{#each set as speed, j}
+									{@const pct = set.length > 1 ? (j / (set.length - 1)) * 100 : 50}
+									{@const isCenter = j === Math.floor(set.length / 2)}
+									<div class="ruler-tick" style:left="{pct}%">
+										<div class="tick-mark" class:center={isCenter} style:background={isCenter ? 'var(--accent)' : 'var(--text-muted)'}></div>
+										<span class="tick-speed" class:center={isCenter}>{speed.label}</span>
+									</div>
+								{/each}
+							</div>
 						</div>
-						<div class="speed-ruler">
-							<div class="ruler-track" style:background={setColor(i)}></div>
-							{#each set as speed, j}
-								{@const pct = set.length > 1 ? (j / (set.length - 1)) * 100 : 50}
-								{@const isCenter = j === centerIndex(set.length)}
-								<div class="ruler-tick" style:left="{pct}%">
-									<div class="tick-mark" class:center={isCenter} style:background={isCenter ? 'var(--accent)' : 'var(--text-muted)'}></div>
-									<span class="tick-speed" class:center={isCenter}>{speed.label}</span>
-								</div>
-							{/each}
-						</div>
-					</div>
-				{/each}
+					{/each}
+				</div>
 			{/if}
 		</div>
 	</div>
@@ -135,33 +139,20 @@
 	</footer>
 </main>
 
-{#if showHelp}
-<!-- svelte-ignore a11y_no_noninteractive_element_interactions a11y_interactive_supports_focus -->
-<div class="overlay" role="dialog" aria-label="How to use HDR Calc" tabindex="-1" onclick={() => showHelp = false}>
-	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<div class="modal" onclick={(e) => e.stopPropagation()} onkeydown={() => {}}>
-		<div class="modal-header">
-			<span class="modal-title">How to Use</span>
-			<button class="modal-close" aria-label="Close" onclick={() => showHelp = false}>&times;</button>
-		</div>
-		<ol class="steps">
-			<li><strong>Meter your shadows.</strong> Point your camera at the darkest area you want detail in and note the shutter speed. Set it under Shadows.</li>
-			<li><strong>Meter your highlights.</strong> Point at the brightest area and note that shutter speed. Set it under Highlights.</li>
-			<li><strong>Match your camera's AEB settings.</strong> Set AEB Frames and EV Spacing to match what your camera supports.</li>
-			<li><strong>Read the results.</strong> The calculator shows how many bracket sets you need and the center shutter speed for each set.</li>
-		</ol>
+<dialog bind:this={helpDialog} class="help-dialog" aria-label="How to use HDR Calc" onclick={onDialogClick}>
+	<div class="modal-header">
+		<span class="modal-title">How to Use</span>
+		<button class="modal-close" aria-label="Close" onclick={closeHelp}>&times;</button>
 	</div>
-</div>
-{/if}
+	<ol class="steps">
+		<li><strong>Meter your shadows.</strong> Point your camera at the darkest area you want detail in and note the shutter speed. Set it under Shadows.</li>
+		<li><strong>Meter your highlights.</strong> Point at the brightest area and note that shutter speed. Set it under Highlights.</li>
+		<li><strong>Match your camera's AEB settings.</strong> Set AEB Frames and EV Spacing to match what your camera supports.</li>
+		<li><strong>Read the results.</strong> The calculator shows how many bracket sets you need and the center shutter speed for each set.</li>
+	</ol>
+</dialog>
 
 <style>
-	main {
-		max-width: 960px;
-		margin: 0 auto;
-		padding: var(--page-padding);
-		min-height: 100dvh;
-	}
-
 	.layout {
 		display: flex;
 		flex-direction: column;
@@ -175,10 +166,7 @@
 		}
 	}
 
-	.title {
-		font-weight: 600;
-		font-size: 20px;
-		margin-bottom: var(--section-gap);
+	.header {
 		display: flex;
 		align-items: center;
 		gap: 16px;
@@ -188,6 +176,20 @@
 		flex: 1;
 		height: 1px;
 		background: var(--card-border);
+	}
+
+	.inputs {
+		display: flex;
+		flex-direction: column;
+		gap: var(--card-gap);
+	}
+
+	.group {
+		margin-top: calc(var(--section-gap) - var(--card-gap));
+	}
+
+	.sets {
+		margin-top: var(--section-gap);
 	}
 
 	.help-btn {
@@ -279,7 +281,7 @@
 		background: var(--card);
 	}
 
-.set-header {
+	.set-header {
 		display: flex;
 		align-items: center;
 		gap: 8px;
@@ -376,24 +378,19 @@
 		color: var(--text);
 	}
 
-	.overlay {
-		position: fixed;
-		inset: 0;
-		background: rgba(0, 0, 0, 0.5);
-		display: flex;
-		align-items: flex-start;
-		justify-content: center;
-		z-index: 100;
-		padding: 120px var(--page-padding) var(--page-padding);
-	}
-
-	.modal {
+	.help-dialog {
 		background: var(--bg);
+		color: var(--text);
 		border: 1px solid var(--card-border);
 		border-radius: var(--card-radius);
 		max-width: 420px;
-		width: 100%;
+		width: calc(100% - 2 * var(--page-padding));
 		padding: 24px;
+		margin: 120px auto auto;
+	}
+
+	.help-dialog::backdrop {
+		background: rgba(0, 0, 0, 0.5);
 	}
 
 	.modal-header {

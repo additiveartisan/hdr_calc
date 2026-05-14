@@ -25,7 +25,7 @@ Set your shadow and highlight speeds, pick your AEB frame count and EV spacing, 
 
 > **1/3-stop scale** from 1/8000s to 30s&ensp;&ensp;·&ensp;&ensp;**3, 5, 7, or 9** AEB frames&ensp;&ensp;·&ensp;&ensp;**1 / 1.5 / 2** EV spacing
 >
-> **Two-phase camera metering**: tap shadows, then highlights, in a single session
+> **Two-phase camera metering** (iOS): tap shadows, then highlights, in a single session
 >
 > **Web** (offline PWA)&ensp;&ensp;+&ensp;&ensp;**iOS** (SwiftUI)
 
@@ -61,34 +61,29 @@ Adjacent sets overlap by one frame. No tonal gaps. The algorithm rounds toward d
 
 ## Web
 
-SvelteKit PWA. Works offline. No dependencies beyond the framework.
+A Progressive Web App. Open it in any browser and install it as a home screen app on iOS, Android, macOS, or Windows. Works fully offline.
 
-```sh
-cd web
-npm install
-npm run dev          # localhost:5173
-```
+**Bracketing** &ensp; All controls on a single page. Picker scrolls through the full 55-value shutter speed scale. Tick-mark ruler visualization for each set.
 
-Installable as a home screen app on any device.
+**No backend** &ensp; Static HTML and JavaScript. Nothing leaves the device.
 
-| | |
-|:--|:--|
-| Framework | SvelteKit 2 + Svelte 5 |
-| Language | TypeScript |
-| Tests | Vitest (`npm test`) |
-| Build | Vite (`npm run build`) |
+**Accessibility** &ensp; Keyboard navigation, ARIA-labeled controls, adaptive light and dark appearance.
+
+Built with SvelteKit and TypeScript.
 
 ---
 
 ## iOS
 
-Native SwiftUI app targeting iOS 17+. Single-screen layout on iPhone, two-column on iPad.
+A native SwiftUI app for iPhone and iPad. iOS 17 or later. Single-screen layout on iPhone, two-column on iPad.
 
 **Bracketing** &ensp; Wheel pickers for the full 55-value shutter speed scale. Tick-mark ruler visualization for each set.
 
 **Camera metering** &ensp; Tap "Meter Scene" to open a two-phase camera flow. In step 1, point at the darkest area and tap to meter shadows. Confirm, and the app advances to step 2 for highlights. The camera stays live throughout both phases, reading exposure directly from the sensor and mapping it to the nearest 1/3-stop. One session, two readings, no friction.
 
 **Accessibility** &ensp; VoiceOver, Dynamic Type, and Reduced Motion support. Adaptive light and dark appearance.
+
+Built with SwiftUI.
 
 ---
 
