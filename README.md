@@ -9,9 +9,9 @@
 <h1 align="center">HDR Calc</h1>
 
 <p align="center">
-  <strong>Exposure bracketing, solved.</strong>
+  <strong>Exposure bracketing field reference</strong>
   <br><br>
-  <a href="#how-it-works">How It Works</a>&ensp;&ensp;|&ensp;&ensp;<a href="#web">Web</a>&ensp;&ensp;|&ensp;&ensp;<a href="#ios">iOS</a>&ensp;&ensp;|&ensp;&ensp;<a href="#privacy">Privacy</a>
+  <a href="#01--concept">Concept</a>&ensp;&ensp;|&ensp;&ensp;<a href="#02--mechanics">Mechanics</a>&ensp;&ensp;|&ensp;&ensp;<a href="#03--web">Web</a>&ensp;&ensp;|&ensp;&ensp;<a href="#04--ios">iOS</a>&ensp;&ensp;|&ensp;&ensp;<a href="#05--privacy">Privacy</a>
 </p>
 
 <p align="center">
@@ -21,77 +21,118 @@
   <img src="ios/screenshot_light.png" width="180" alt="Light mode">
 </p>
 
-Set your shadow and highlight speeds, pick your AEB frame count and EV spacing, and the app instantly shows every bracket set you need to capture. Built for real estate, architecture, landscape, and interior photography.
+Set your shadow and highlight speeds, pick AEB frame count and EV spacing, and the app shows every bracket set you need. Built for real estate, architecture, landscape, and interior photography.
 
-> **1/3-stop scale** from 1/8000s to 30s&ensp;&ensp;·&ensp;&ensp;**3, 5, 7, or 9** AEB frames&ensp;&ensp;·&ensp;&ensp;**1 / 1.5 / 2** EV spacing
->
-> **Two-phase camera metering** (iOS): tap shadows, then highlights, in a single session
->
-> **Web** (offline PWA)&ensp;&ensp;+&ensp;&ensp;**iOS** (SwiftUI)
-
----
-
-## How It Works
-
-Meter the brightest and darkest parts of your scene. HDR Calc figures out the rest.
-
-```
-  SHADOWS           1/4 sec
-  HIGHLIGHTS        1/1000 sec
-  AEB FRAMES        3  [5]  7   9
-  EV SPACING       [1]  1.5   2
-
-  ───────────────────────────────
-  8 EV  ·  3 sets  ·  15 frames
-  ───────────────────────────────
-
-  Set 1   ├──┼──┼──╋──┼──┤
-          1/1000    1/250    1/60
-
-  Set 2   ├──┼──┼──╋──┼──┤
-          1/60      1/15     1/4
-
-  Set 3   ├──┼──┼──╋──┼──┤
-          1/4       1"       4"
-```
-
-Adjacent sets overlap by one frame. No tonal gaps. The algorithm rounds toward darker exposures for extra safety margin.
+| Shadows | Highlights | Frames | Spacing |
+| :-: | :-: | :-: | :-: |
+| **1/4s** | **1/1000s** | **5** | **1 EV** |
+| Darkest detail | Brightest detail | Per AEB set | Per scene |
 
 ---
 
-## Web
+## 01 · Concept
 
-A Progressive Web App. Open it in any browser and install it as a home screen app on iOS, Android, macOS, or Windows. Works fully offline.
+### Two readings
 
-**Bracketing** &ensp; All controls on a single page. Picker scrolls through the full 55-value shutter speed scale. Tick-mark ruler visualization for each set.
+Meter the brightest and darkest parts of your scene. HDR Calc figures out every bracket set you need to cover the full tonal range — no gaps, with a safety margin toward darker exposures.
 
-**No backend** &ensp; Static HTML and JavaScript. Nothing leaves the device.
+1. Meter your **shadows** — the darkest area you want detail in. Note the shutter speed.
+2. Meter your **highlights** — the brightest area you want detail in. Note that shutter speed.
+3. Pick your camera's **AEB frame count** (3, 5, 7, 9) and **EV spacing** (1, 1.5, 2).
+4. Read the results — every bracket set with the center shutter speed.
 
-**Accessibility** &ensp; Keyboard navigation, ARIA-labeled controls, adaptive light and dark appearance.
-
-Built with SvelteKit and TypeScript.
-
----
-
-## iOS
-
-A native SwiftUI app for iPhone and iPad. iOS 17 or later. Single-screen layout on iPhone, two-column on iPad.
-
-**Bracketing** &ensp; Wheel pickers for the full 55-value shutter speed scale. Tick-mark ruler visualization for each set.
-
-**Camera metering** &ensp; Tap "Meter Scene" to open a two-phase camera flow. In step 1, point at the darkest area and tap to meter shadows. Confirm, and the app advances to step 2 for highlights. The camera stays live throughout both phases, reading exposure directly from the sensor and mapping it to the nearest 1/3-stop. One session, two readings, no friction.
-
-**Accessibility** &ensp; VoiceOver, Dynamic Type, and Reduced Motion support. Adaptive light and dark appearance.
-
-Built with SwiftUI.
+> **Overlap by design.** Adjacent sets overlap by one frame. The algorithm rounds toward darker exposures so shadow detail is never sacrificed.
 
 ---
 
-## Privacy
+## 02 · Mechanics
 
-No data collected. No analytics, no tracking, no network requests.
+### Stop scale
 
-Camera access (iOS) is used solely for real-time exposure metering. No frames are recorded or transmitted.
+The shutter speed picker steps through the standard **1/3-stop** scale used by every modern camera — 55 values from `1/8000s` to `30s`.
+
+### Inputs
+
+| Field | Value | |
+| --- | --- | :-: |
+| Shadows | Shutter speed for darkest detail | LOCKED |
+| Highlights | Shutter speed for brightest detail | LOCKED |
+| AEB Frames | 3, 5, 7, or 9 per set | LOCKED |
+| EV Spacing | 1, 1.5, or 2 stops | PER SHOT |
+
+### Worked example
+
+Shadows `1/4s`, highlights `1/1000s` — an **8 EV** range. With 5-frame AEB at 1 EV spacing, three sets cover the range with one-frame overlap.
+
+| Set | Start | Center | End |
+| :-: | :-: | :-: | :-: |
+| 1 | `1/1000` | `1/250` | `1/60` |
+| 2 | `1/60` | `1/15` | `1/4` |
+| 3 | `1/4` | `1"` | `4"` |
+
+> **8 EV · 3 sets · 15 frames.** Each set's last frame matches the next set's first frame — continuous tonal coverage.
+
+---
+
+## 03 · Web
+
+### Progressive Web App
+
+Open in any browser and install as a home-screen app on iOS, Android, macOS, or Windows. Works fully offline once installed.
+
+| | |
+| --- | --- |
+| **Pickers** | Full 55-value 1/3-stop shutter speed scale |
+| **Visualization** | Tick-mark ruler per bracket set |
+| **Backend** | None — static HTML and JavaScript |
+| **Network** | Zero requests after install |
+| **Accessibility** | Keyboard nav, ARIA labels, adaptive light/dark |
+| **Stack** | SvelteKit + TypeScript |
+
+---
+
+## 04 · iOS
+
+### Native app
+
+Native SwiftUI for iPhone and iPad. iOS 17 or later. Single-screen on iPhone, two-column on iPad.
+
+| | |
+| --- | --- |
+| **Pickers** | Wheel pickers on the full 1/3-stop scale |
+| **Visualization** | Tick-mark ruler per bracket set |
+| **Layout** | Single-screen iPhone · two-column iPad |
+| **Accessibility** | VoiceOver, Dynamic Type, Reduced Motion |
+| **Stack** | SwiftUI |
+
+### Camera metering
+
+Tap **Meter Scene** to open a two-phase camera flow. The camera reads exposure directly from the sensor and maps it to the nearest 1/3-stop.
+
+1. Point at the **darkest** area you want detail in. Tap to meter shadows.
+2. Confirm. The app advances to step 2 with the camera still live.
+3. Point at the **brightest** area. Tap to meter highlights.
+4. Both speeds drop straight into the calculator.
+
+> **One session, two readings, no friction** — the camera stays live throughout both phases.
+
+---
+
+## 05 · Privacy
+
+### Data
+
+| | |
+| --- | --- |
+| **Collected** | Nothing |
+| **Analytics** | None |
+| **Tracking** | None |
+| **Network requests** | Zero |
+| **Account required** | No |
+
+### Camera (iOS)
+
+Camera access is used **solely** for real-time exposure metering. Frames are processed on-device and discarded. Nothing is recorded, saved, or transmitted.
 
 ---
 
