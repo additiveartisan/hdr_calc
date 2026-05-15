@@ -80,14 +80,14 @@ Shadows `1/4s`, highlights `1/1000s` — an **8 EV** range. With 5-frame AEB at 
 
 Open in any browser and install as a home-screen app on iOS, Android, macOS, or Windows. Works fully offline once installed.
 
-| | |
-| --- | --- |
-| **Pickers** | Full 55-value 1/3-stop shutter speed scale |
-| **Visualization** | Tick-mark ruler per bracket set |
-| **Backend** | None — static HTML and JavaScript |
-| **Network** | Zero requests after install |
-| **Accessibility** | Keyboard nav, ARIA labels, adaptive light/dark |
-| **Stack** | SvelteKit + TypeScript |
+<table>
+  <tr><td><b>Pickers</b></td><td>Full 55-value 1/3-stop shutter speed scale</td></tr>
+  <tr><td><b>Visualization</b></td><td>Tick-mark ruler per bracket set</td></tr>
+  <tr><td><b>Backend</b></td><td>None — static HTML and JavaScript</td></tr>
+  <tr><td><b>Network</b></td><td>Zero requests after install</td></tr>
+  <tr><td><b>Accessibility</b></td><td>Keyboard nav, ARIA labels, adaptive light/dark</td></tr>
+  <tr><td><b>Stack</b></td><td>SvelteKit + TypeScript</td></tr>
+</table>
 
 ---
 
@@ -97,13 +97,13 @@ Open in any browser and install as a home-screen app on iOS, Android, macOS, or 
 
 Native SwiftUI for iPhone and iPad. iOS 17 or later. Single-screen on iPhone, two-column on iPad.
 
-| | |
-| --- | --- |
-| **Pickers** | Wheel pickers on the full 1/3-stop scale |
-| **Visualization** | Tick-mark ruler per bracket set |
-| **Layout** | Single-screen iPhone · two-column iPad |
-| **Accessibility** | VoiceOver, Dynamic Type, Reduced Motion |
-| **Stack** | SwiftUI |
+<table>
+  <tr><td><b>Pickers</b></td><td>Wheel pickers on the full 1/3-stop scale</td></tr>
+  <tr><td><b>Visualization</b></td><td>Tick-mark ruler per bracket set</td></tr>
+  <tr><td><b>Layout</b></td><td>Single-screen iPhone · two-column iPad</td></tr>
+  <tr><td><b>Accessibility</b></td><td>VoiceOver, Dynamic Type, Reduced Motion</td></tr>
+  <tr><td><b>Stack</b></td><td>SwiftUI</td></tr>
+</table>
 
 ### Camera metering
 
@@ -122,13 +122,13 @@ Tap **Meter Scene** to open a two-phase camera flow. The camera reads exposure d
 
 ### Data
 
-| | |
-| --- | --- |
-| **Collected** | Nothing |
-| **Analytics** | None |
-| **Tracking** | None |
-| **Network requests** | Zero |
-| **Account required** | No |
+<table>
+  <tr><td><b>Collected</b></td><td>Nothing</td></tr>
+  <tr><td><b>Analytics</b></td><td>None</td></tr>
+  <tr><td><b>Tracking</b></td><td>None</td></tr>
+  <tr><td><b>Network requests</b></td><td>Zero</td></tr>
+  <tr><td><b>Account required</b></td><td>No</td></tr>
+</table>
 
 ### Camera (iOS)
 
